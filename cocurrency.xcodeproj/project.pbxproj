@@ -13,7 +13,6 @@
 		02FA8C2419D7ED280053342B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02FA8C2219D7ED280053342B /* Main.storyboard */; };
 		02FA8C2619D7ED280053342B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02FA8C2519D7ED280053342B /* Images.xcassets */; };
 		02FA8C2919D7ED280053342B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02FA8C2719D7ED280053342B /* LaunchScreen.xib */; };
-		02FA8C3519D7ED280053342B /* cocurrencyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA8C3419D7ED280053342B /* cocurrencyTests.m */; };
 		02FA8C4019D80F8F0053342B /* DownloadInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA8C3F19D80F8F0053342B /* DownloadInfo.m */; };
 /* End PBXBuildFile section */
 
@@ -39,8 +38,6 @@
 		02FA8C2519D7ED280053342B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		02FA8C2819D7ED280053342B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		02FA8C2E19D7ED280053342B /* cocurrencyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cocurrencyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		02FA8C3319D7ED280053342B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		02FA8C3419D7ED280053342B /* cocurrencyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cocurrencyTests.m; sourceTree = "<group>"; };
 		02FA8C3E19D80F8F0053342B /* DownloadInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadInfo.h; sourceTree = "<group>"; };
 		02FA8C3F19D80F8F0053342B /* DownloadInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadInfo.m; sourceTree = "<group>"; };
 		02FA8C4119D8FD770053342B /* UIUpdateFromSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIUpdateFromSession.h; sourceTree = "<group>"; };
@@ -68,7 +65,6 @@
 			isa = PBXGroup;
 			children = (
 				02FA8C1719D7ED280053342B /* cocurrency */,
-				02FA8C3119D7ED280053342B /* cocurrencyTests */,
 				02FA8C1619D7ED280053342B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -105,23 +101,6 @@
 				02FA8C1919D7ED280053342B /* Info.plist */,
 				02FA8C1A19D7ED280053342B /* main.m */,
 				02FA8C4119D8FD770053342B /* UIUpdateFromSession.h */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		02FA8C3119D7ED280053342B /* cocurrencyTests */ = {
-			isa = PBXGroup;
-			children = (
-				02FA8C3419D7ED280053342B /* cocurrencyTests.m */,
-				02FA8C3219D7ED280053342B /* Supporting Files */,
-			);
-			path = cocurrencyTests;
-			sourceTree = "<group>";
-		};
-		02FA8C3219D7ED280053342B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				02FA8C3319D7ED280053342B /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -237,7 +216,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02FA8C3519D7ED280053342B /* cocurrencyTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
