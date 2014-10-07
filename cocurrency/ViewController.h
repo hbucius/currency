@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "UIUpdateFromSession.h"
 
-@interface ViewController : UIViewController <UIUpdateFromSession>
+@interface ViewController : UIViewController <UIUpdateFromSession,UITableViewDataSource,UITableViewDelegate>
+
 
 
 @end

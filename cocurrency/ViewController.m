@@ -8,7 +8,10 @@
 
 #import "ViewController.h"
 #import "DownloadInfo.h"
-@interface ViewController ()
+#import "UICustomCell.h"
+
+@interface ViewController  ()
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @end
 
@@ -17,8 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    _tableview.dataSource=self;
+    _tableview.delegate=self;
     DownloadInfo *info=[[DownloadInfo alloc]initWithDelegate:self];
     [info updateInfo];
+    
     
 }
 
@@ -34,4 +40,25 @@
     
     NSLog(@"UI Error is updated");
 }
+
+
+- (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *reuseIdentifier=@"tableCell";
+    UICustomCell *cell=[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    cell.currencyImage.image=[UIImage imageNamed:@"CNY.png"];
+    cell.currencyName.text=@"CHN";
+    
+    
+    
+    return cell;
+}
+
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    return 1;
+}
+
+
+
 @end
