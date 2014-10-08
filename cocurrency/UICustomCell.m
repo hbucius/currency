@@ -28,4 +28,14 @@
     // Configure the view for the selected state
 }
 
+- (void) drawRect:(CGRect)rect {
+    CALayer *btLayer=[self.currencyImage layer];
+    [btLayer setMasksToBounds:YES];
+    [btLayer setCornerRadius:4.0f];
+    [self.currencyImage setBackgroundColor:[UIColor clearColor]];
+    
+    
+}
+
+
 @end

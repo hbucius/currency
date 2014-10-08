@@ -16,6 +16,10 @@
 		02FA8C4019D80F8F0053342B /* DownloadInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA8C3F19D80F8F0053342B /* DownloadInfo.m */; };
 		5A09012619E444E4007653C2 /* CNY.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A09012519E444E4007653C2 /* CNY.png */; };
 		5A09012919E448CC007653C2 /* UICustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A09012819E448CC007653C2 /* UICustomCell.m */; };
+		5A217E9419E599AD009FB91F /* EUR.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A217E9119E599AD009FB91F /* EUR.png */; };
+		5A217E9519E599AD009FB91F /* HKD.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A217E9219E599AD009FB91F /* HKD.png */; };
+		5A217E9619E599AD009FB91F /* USD.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A217E9319E599AD009FB91F /* USD.png */; };
+		5A217E9C19E5A302009FB91F /* CurrencyName.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A217E9B19E5A302009FB91F /* CurrencyName.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +39,11 @@
 		5A09012519E444E4007653C2 /* CNY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CNY.png; sourceTree = "<group>"; };
 		5A09012719E448CC007653C2 /* UICustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomCell.h; sourceTree = "<group>"; };
 		5A09012819E448CC007653C2 /* UICustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomCell.m; sourceTree = "<group>"; };
+		5A217E9119E599AD009FB91F /* EUR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EUR.png; sourceTree = "<group>"; };
+		5A217E9219E599AD009FB91F /* HKD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HKD.png; sourceTree = "<group>"; };
+		5A217E9319E599AD009FB91F /* USD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = USD.png; sourceTree = "<group>"; };
+		5A217E9A19E5A302009FB91F /* CurrencyName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyName.h; sourceTree = "<group>"; };
+		5A217E9B19E5A302009FB91F /* CurrencyName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyName.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +77,10 @@
 		02FA8C1719D7ED280053342B /* cocurrency */ = {
 			isa = PBXGroup;
 			children = (
+				5A217E9A19E5A302009FB91F /* CurrencyName.h */,
+				5A217E9B19E5A302009FB91F /* CurrencyName.m */,
+				02FA8C3E19D80F8F0053342B /* DownloadInfo.h */,
+				02FA8C3F19D80F8F0053342B /* DownloadInfo.m */,
 				5A09012719E448CC007653C2 /* UICustomCell.h */,
 				5A09012819E448CC007653C2 /* UICustomCell.m */,
 				02FA8C1C19D7ED280053342B /* AppDelegate.h */,
@@ -78,8 +91,6 @@
 				02FA8C2519D7ED280053342B /* Images.xcassets */,
 				02FA8C2719D7ED280053342B /* LaunchScreen.xib */,
 				02FA8C1819D7ED280053342B /* Supporting Files */,
-				02FA8C3E19D80F8F0053342B /* DownloadInfo.h */,
-				02FA8C3F19D80F8F0053342B /* DownloadInfo.m */,
 			);
 			path = cocurrency;
 			sourceTree = "<group>";
@@ -97,6 +108,9 @@
 		5A09012419E444E4007653C2 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				5A217E9119E599AD009FB91F /* EUR.png */,
+				5A217E9219E599AD009FB91F /* HKD.png */,
+				5A217E9319E599AD009FB91F /* USD.png */,
 				5A09012519E444E4007653C2 /* CNY.png */,
 			);
 			name = images;
@@ -163,6 +177,9 @@
 				5A09012619E444E4007653C2 /* CNY.png in Resources */,
 				02FA8C2419D7ED280053342B /* Main.storyboard in Resources */,
 				02FA8C2919D7ED280053342B /* LaunchScreen.xib in Resources */,
+				5A217E9519E599AD009FB91F /* HKD.png in Resources */,
+				5A217E9619E599AD009FB91F /* USD.png in Resources */,
+				5A217E9419E599AD009FB91F /* EUR.png in Resources */,
 				02FA8C2619D7ED280053342B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -175,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02FA8C2119D7ED280053342B /* ViewController.m in Sources */,
+				5A217E9C19E5A302009FB91F /* CurrencyName.m in Sources */,
 				5A09012919E448CC007653C2 /* UICustomCell.m in Sources */,
 				02FA8C4019D80F8F0053342B /* DownloadInfo.m in Sources */,
 				02FA8C1E19D7ED280053342B /* AppDelegate.m in Sources */,

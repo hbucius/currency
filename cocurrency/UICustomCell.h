@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *inputText;
 
 @property (weak, nonatomic) IBOutlet UILabel *currencyName;
+@property (weak, nonatomic) IBOutlet UILabel *currencyFullName;
 
 @end

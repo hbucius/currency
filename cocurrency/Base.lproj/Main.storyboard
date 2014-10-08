@@ -3,6 +3,7 @@
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -27,7 +28,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" sectionIndexMinimumDisplayRowCount="10" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aQU-aU-PrO">
                                 <rect key="frame" x="16" y="80" width="568" height="500"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" red="0.93616253396739135" green="0.93616253396739135" blue="0.93616253396739135" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableCell" id="WfY-4X-L2G" customClass="UICustomCell">
@@ -36,36 +37,57 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uFG-EU-gMU">
-                                                    <rect key="frame" x="8" y="8" width="30" height="22"/>
+                                                    <rect key="frame" x="8" y="19" width="2" height="2"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="9rj-Ta-TOC"/>
-                                                        <constraint firstAttribute="width" constant="30" id="gfF-ea-9oB"/>
+                                                        <constraint firstAttribute="width" secondItem="uFG-EU-gMU" secondAttribute="height" multiplier="1:1" id="UGF-DV-L93"/>
                                                     </constraints>
                                                 </imageView>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qP9-lz-fEW">
-                                                    <rect key="frame" x="534" y="8" width="26" height="27"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                <textField autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="qP9-lz-fEW" userLabel="No Border Style Text Field">
+                                                    <rect key="frame" x="76" y="9" width="464" height="30"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="24"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
                                                 </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBy-Gk-Bok">
-                                                    <rect key="frame" x="48" y="9" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBy-Gk-Bok">
+                                                    <rect key="frame" x="25" y="8" width="43" height="24"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Label">
+                                                            <attributes>
+                                                                <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <font key="NSFont" size="17" name="AvenirNext-Regular"/>
+                                                                <font key="NSOriginalFont" size="17" name="AmericanTypewriter"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="currencyFullName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qp6-AO-x3D">
+                                                    <rect key="frame" x="8" y="23" width="60" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="qP9-lz-fEW" secondAttribute="trailing" id="BSy-C1-QlU"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="qP9-lz-fEW" secondAttribute="trailing" constant="20" id="BSy-C1-QlU"/>
+                                                <constraint firstItem="qp6-AO-x3D" firstAttribute="trailing" secondItem="RBy-Gk-Bok" secondAttribute="trailing" id="Hea-Zd-2tz"/>
+                                                <constraint firstItem="qp6-AO-x3D" firstAttribute="leading" secondItem="uFG-EU-gMU" secondAttribute="leading" id="ImM-6H-llg"/>
+                                                <constraint firstItem="qp6-AO-x3D" firstAttribute="top" secondItem="uFG-EU-gMU" secondAttribute="bottom" constant="5" id="NWs-Qx-bHw"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="qP9-lz-fEW" secondAttribute="bottom" id="PZE-6P-qzL"/>
-                                                <constraint firstItem="RBy-Gk-Bok" firstAttribute="leading" secondItem="uFG-EU-gMU" secondAttribute="trailing" constant="10" id="SaX-zS-Z9c"/>
+                                                <constraint firstItem="RBy-Gk-Bok" firstAttribute="leading" secondItem="uFG-EU-gMU" secondAttribute="trailing" constant="15" id="SaX-zS-Z9c"/>
+                                                <constraint firstItem="qp6-AO-x3D" firstAttribute="top" secondItem="RBy-Gk-Bok" secondAttribute="bottom" constant="5" id="Tz7-nd-L7S"/>
+                                                <constraint firstItem="qP9-lz-fEW" firstAttribute="leading" secondItem="RBy-Gk-Bok" secondAttribute="trailing" constant="20" id="XOb-ie-LLe"/>
                                                 <constraint firstItem="qP9-lz-fEW" firstAttribute="top" secondItem="QLU-Dc-5lm" secondAttribute="topMargin" id="XhB-J0-zC0"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="uFG-EU-gMU" secondAttribute="bottom" constant="5" id="bQw-HT-ZNl"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="qp6-AO-x3D" secondAttribute="bottom" constant="-5" id="ZJh-uK-Da9"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="uFG-EU-gMU" secondAttribute="bottom" constant="15" id="bQw-HT-ZNl"/>
                                                 <constraint firstItem="uFG-EU-gMU" firstAttribute="leading" secondItem="QLU-Dc-5lm" secondAttribute="leadingMargin" id="dmG-kJ-SuF"/>
-                                                <constraint firstItem="uFG-EU-gMU" firstAttribute="top" secondItem="QLU-Dc-5lm" secondAttribute="topMargin" id="ju3-cK-Vj4"/>
+                                                <constraint firstItem="uFG-EU-gMU" firstAttribute="top" secondItem="QLU-Dc-5lm" secondAttribute="topMargin" constant="10" id="ju3-cK-Vj4"/>
                                                 <constraint firstItem="RBy-Gk-Bok" firstAttribute="centerY" secondItem="uFG-EU-gMU" secondAttribute="centerY" id="rIo-5A-Rvd"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="currencyFullName" destination="qp6-AO-x3D" id="M9t-au-qdZ"/>
                                             <outlet property="currencyImage" destination="uFG-EU-gMU" id="Vm7-Te-RJa"/>
                                             <outlet property="currencyName" destination="RBy-Gk-Bok" id="8wd-ao-lO1"/>
                                             <outlet property="inputText" destination="qP9-lz-fEW" id="Yd9-qf-R1w"/>
@@ -108,7 +130,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="189" y="137"/>
+            <point key="canvasLocation" x="189" y="136"/>
         </scene>
     </scenes>
 </document>

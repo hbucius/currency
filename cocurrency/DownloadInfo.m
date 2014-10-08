@@ -13,8 +13,7 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
 @interface DownloadInfo ()
 - (NSDictionary *) getDicFromObject :(NSData *) data;
 
-@property(strong,nonatomic) NSDictionary *dictionary;
-@property(strong,nonatomic) NSMutableDictionary *cocurrencyName;
+@property(strong,nonatomic) NSDictionary *currency;
 
 
 @end
@@ -29,36 +28,17 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
     if(self) {
         _session=[NSURLSession sharedSession];
         _delegate=delegate;
-        [self initCucurrencyNameDictionary];
-    }
+     }
     return self;
 }
 
-- (void) initCucurrencyNameDictionary{
-    self.cocurrencyName=[[NSMutableDictionary alloc]init];
-    NSArray *array1=[[NSArray alloc] initWithObjects:@"CNY",@"人民币",@"USD",@"美元",@"HKD", @"港币",@"EUR", @"欧元", @"JPY",@"日元", @"GBP",@"英镑", @"TWD",@"新台币", nil];
-    NSArray *array2=[[NSArray alloc]initWithObjects:@"MOP",@"澳门币",@"AUD",@"澳元",@"CAD",@"加拿大元",nil];
-    NSArray *arrayAll=[[NSArray alloc]initWithObjects:array1,array2, nil];
-    
-    NSString *tempKey;
-    for (int i=0; i<arrayAll.count; i++) {
-        NSArray *tempArray=[arrayAll objectAtIndex:i];
-        for (int j=0; j<tempArray.count; j++) {
-            if(j%2==0) {
-                tempKey=[tempArray objectAtIndex:j];
-                continue;
-            }
-            else [self.cocurrencyName setValue:[tempArray objectAtIndex:j] forKey:tempKey];
-        }
-    }
-    
-}
+
 
 - (void) updateInfo {
     NSURLSessionDataTask *dataTask=[self.session dataTaskWithURL:[NSURL URLWithString:yahoolURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSString *string =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"the data is %@",string);
-        self.dictionary=[self getDicFromObject:data];
+        self.currency=[self getDicFromObject:data];
         [self.delegate updateUI];
     }];
     [dataTask resume];
@@ -79,7 +59,7 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
                 
                 if([resourceArray isKindOfClass:[NSArray class]]){
                     NSArray *array=(NSArray *)resourceArray;
-                    NSLog(array.description);
+                    //NSLog(array.description);
                     for (int i=0; i<[array count]; i++) {
                         id resourceInArray=array[i];
                         if ([resourceInArray isKindOfClass:[NSDictionary class]]) {
@@ -106,6 +86,14 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
         
     }
     return nil;
+}
+
+
+
+
+-(float) exchangeToCurrency:(NSString*) newCurrencyName withNumber:(float) number oldCurrency:(NSString*) oldCurrencyName{
+    
+    return number;
 }
 
 

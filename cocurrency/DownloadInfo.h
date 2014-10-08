@@ -12,10 +12,9 @@
 @interface DownloadInfo : NSObject
 
 @property(strong,nonatomic) NSURLSession * session;
-@property(strong,nonatomic) NSDictionary * cocurrencyDictionary;
 @property (strong,nonatomic) id <UIUpdateFromSession> delegate ;
 
 -(instancetype) initWithDelegate:(id) delegate;
 -(void) updateInfo ;
-
+-(float) exchangeToCurrency:(NSString*) newCurrencyName withNumber:(float) number oldCurrency:(NSString*) oldCurrencyName;
 @end
