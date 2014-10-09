@@ -24,7 +24,7 @@
     if (self) {
         self.cocurrencyName=[[NSMutableDictionary alloc]init];
         NSArray *array1=[[NSArray alloc] initWithObjects:@"CNY",@"人民币",@"USD",@"美元",@"HKD", @"港币",@"EUR", @"欧元", @"JPY",@"日元", @"GBP",@"英镑", @"TWD",@"新台币", nil];
-        NSArray *array2=[[NSArray alloc]initWithObjects:@"MOP",@"澳门币",@"AUD",@"澳元",@"CAD",@"加拿大元",nil];
+        NSArray *array2=[[NSArray alloc]initWithObjects:@"MOP",@"澳门币",@"AUD",@"澳元",@"CAD",@"加拿大元",@"TWD",@"韩元",nil];
         NSArray *arrayAll=[[NSArray alloc]initWithObjects:array1,array2, nil];
         
         NSString *tempKey;

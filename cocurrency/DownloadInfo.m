@@ -92,8 +92,13 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
 
 
 -(float) exchangeToCurrency:(NSString*) newCurrencyName withNumber:(float) number oldCurrency:(NSString*) oldCurrencyName{
-    
-    return number;
+    float value1=[[self.currency valueForKey:[NSString stringWithFormat:@"USD/%@",oldCurrencyName]] floatValue];
+    float value2=[[self.currency valueForKey:[NSString stringWithFormat:@"USD/%@",newCurrencyName]] floatValue];
+    NSLog(@"the old currency name is %@ ,the new currency name is %@",oldCurrencyName,newCurrencyName);
+    if(value1!=0)
+        return value2*number/value1;
+    else
+        return 0;
 }
 
 

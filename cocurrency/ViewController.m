@@ -13,9 +13,14 @@
 
 @interface ViewController  ()
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
+@property (weak, nonatomic) IBOutlet UILabel *MainUITitle;
+@property (weak, nonatomic) IBOutlet UIButton *AddCurrency;
+@property (weak, nonatomic) IBOutlet UIButton *Refresh;
 @property (strong,nonatomic) NSMutableArray   * currencyShown;
+@property (strong,nonatomic) NSMutableArray   * NumberShown;
 @property (strong,nonatomic) DownloadInfo * info;
 @property (strong,nonatomic) CurrencyName * currencyFullName;
+@property (strong,nonatomic)  UITextField * firstResponder;
 @end
 
 @implementation ViewController
@@ -23,14 +28,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    _tableview.dataSource=self;
-    _tableview.delegate=self;
+    [self initMainFrameUI];
     [self initCurrencyShow];
+    [self initNumberShow];
     [self initCurrencyInfo];
     [self initCurrencyFullName];
     [self.info updateInfo];
-    
-    
+    [self setupForDismissKeyboard];
+    _tableview.dataSource=self;
+    _tableview.delegate=self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,9 +44,25 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) initCurrencyShow{
-    _currencyShown=[[NSMutableArray alloc]initWithObjects:@"CNY",@"USD",@"EUR",@"HKD", nil];
+-(void)initMainFrameUI{
+    self.MainUITitle.text=@"汇率换算";
+    self.AddCurrency.hidden=YES;
+    self.Refresh.titleLabel.text=@"刷新";
+    self.tableview.allowsSelection=false;
     
+}
+
+- (void) initCurrencyShow{
+    _currencyShown=[[NSMutableArray alloc]initWithObjects:@"CNY",@"USD",@"EUR",@"HKD", @"JPY",@"KRW",@"GBP",@"TWD",@"MOP",@"CAD",nil];
+    //_currencyShown=[[NSMutableArray alloc]initWithObjects:@"CNY",@"USD",@"EUR",@"HKD",nil];
+ 
+}
+- (void) initNumberShow{
+    _NumberShown=[[NSMutableArray alloc]init];
+    for (int i=0; i<_currencyShown.count; i++) {
+        [_NumberShown addObject:[NSNumber numberWithFloat:0]];
+    }
+    NSLog(@"initNumberShown finished") ;
 }
 
 -(void) initCurrencyInfo{
@@ -49,6 +71,18 @@
 
 -(void) initCurrencyFullName{
     _currencyFullName=[[CurrencyName alloc]init];
+    
+}
+
+-(void) setupForDismissKeyboard{
+    UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        [self.view addGestureRecognizer:tapRecognizer];
+    }];
+    [[NSNotificationCenter defaultCenter]addObserverForName:UIKeyboardDidHideNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        [self.view removeGestureRecognizer:tapRecognizer];
+    }];
+    
     
 }
 
@@ -67,9 +101,12 @@
     NSString *reuseIdentifier=@"tableCell";
     UICustomCell *cell=[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     NSString *currencyName=[self.currencyShown objectAtIndex:indexPath.row];
+    NSLog(@"the currency name is %@, the row is %ld",currencyName,indexPath.row);
     cell.currencyImage.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@.png",currencyName]];
     cell.currencyName.text=currencyName;
     cell.currencyFullName.text=[self.currencyFullName getFullCurrencyNameWith:currencyName];
+    float currencyNumber=[(NSNumber*)self.NumberShown[indexPath.row] floatValue];
+    cell.inputText.text=[NSString stringWithFormat:@"%.3f",currencyNumber];
     return cell;
 }
 
@@ -79,7 +116,7 @@
     return [self.currencyShown count];
 }
 
-#pragma mark table view data delegate
+#pragma mark table view  delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -88,6 +125,73 @@
 
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+   // NSLog(@"the row at %ld is selected",indexPath.row);
+  ///  UICustomCell *cell=(UICustomCell*)[self.tableview cellForRowAtIndexPath:indexPath];
+   // [cell.inputText becomeFirstResponder];
+   // self.firstResponder=cell;
+    
+}
 
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UICustomCell *cell=(UICustomCell*)[self.tableview cellForRowAtIndexPath:indexPath];
+    cell.highlighted=NO;
+}
+
+
+
+
+
+#pragma mark UI update actions
+
+
+- (IBAction)inputField:(UITextField *)sender {
+   // NSLog([[[[[sender superview] superview]superview] class] debugDescription]);
+    UIView *view=[[[sender superview] superview]superview];
+    if([view isKindOfClass:[UICustomCell class]]){
+        UICustomCell *hotCell=(UICustomCell*)view;
+        NSIndexPath *indexpath=[self.tableview indexPathForCell:hotCell];
+        NSLog(@"the %ld",indexpath.row);
+        [self updateOtherCellWithIndexPath:indexpath];
+    }
+}
+
+
+
+
+- (IBAction)inputFieldBeginEdit:(UITextField *)sender {
+    self.firstResponder=sender;
+    NSLog(@"firstResponder exists22 ,%p",self.firstResponder);
+
+}
+
+-  (void) updateOtherCellWithIndexPath:(NSIndexPath*)indexPath{
+    UICustomCell *cell_old=(UICustomCell*)[self.tableview cellForRowAtIndexPath:indexPath];
+    float oldCurrencyNumbr=[cell_old.inputText.text floatValue];
+    NSString *oldCurrencyName=self.currencyShown[indexPath.row];
+    [self.NumberShown replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithFloat:oldCurrencyNumbr]];
+    for (int i=0; i<self.currencyShown.count; i++) {
+        if(indexPath.row==i) continue;
+        NSString *newCurrencyName=self.currencyShown[i];
+        float currencyNumber=[self.info exchangeToCurrency:newCurrencyName withNumber:oldCurrencyNumbr oldCurrency:oldCurrencyName];
+        [self.NumberShown replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:currencyNumber]];
+        UICustomCell *cell_new=(UICustomCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        cell_new.inputText.text=[NSString stringWithFormat:@"%.3f",[self.NumberShown[i] floatValue]];
+    }
+}
+
+
+- (void) dismissKeyboard{
+    NSLog(@"I am trying to dismiss keyboard");
+    NSLog(@"the first responder's address is %p",self.firstResponder);
+    [self.firstResponder resignFirstResponder];
+    self.firstResponder=nil;
+    
+}
+
+-(void) refreshTableView{
+    
+    [self.tableview reloadData];
+}
 
 @end

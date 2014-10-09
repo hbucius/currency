@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -25,31 +24,35 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" sectionIndexMinimumDisplayRowCount="10" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aQU-aU-PrO">
-                                <rect key="frame" x="16" y="80" width="568" height="500"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" sectionIndexMinimumDisplayRowCount="10" rowHeight="99" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aQU-aU-PrO">
+                                <rect key="frame" x="16" y="77" width="568" height="503"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.93616253396739135" green="0.93616253396739135" blue="0.93616253396739135" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableCell" id="WfY-4X-L2G" customClass="UICustomCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableCell" rowHeight="99" id="WfY-4X-L2G" customClass="UICustomCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WfY-4X-L2G" id="QLU-Dc-5lm">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uFG-EU-gMU">
-                                                    <rect key="frame" x="8" y="19" width="2" height="2"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uFG-EU-gMU">
+                                                    <rect key="frame" x="8" y="8" width="67" height="67"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="uFG-EU-gMU" secondAttribute="height" multiplier="1:1" id="UGF-DV-L93"/>
                                                     </constraints>
                                                 </imageView>
-                                                <textField autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="qP9-lz-fEW" userLabel="No Border Style Text Field">
-                                                    <rect key="frame" x="76" y="9" width="464" height="30"/>
+                                                <textField autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qP9-lz-fEW" userLabel="No Border Style Text Field">
+                                                    <rect key="frame" x="153" y="8" width="387" height="82"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="24"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" keyboardAppearance="alert"/>
+                                                    <connections>
+                                                        <action selector="inputField:" destination="vXZ-lx-hvc" eventType="editingChanged" id="6dp-Uk-A8y"/>
+                                                        <action selector="inputFieldBeginEdit:" destination="vXZ-lx-hvc" eventType="editingDidBegin" id="tQu-su-tbp"/>
+                                                    </connections>
                                                 </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBy-Gk-Bok">
-                                                    <rect key="frame" x="25" y="8" width="43" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBy-Gk-Bok">
+                                                    <rect key="frame" x="90" y="8" width="43" height="67"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="Label">
                                                             <attributes>
@@ -62,8 +65,8 @@
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="currencyFullName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qp6-AO-x3D">
-                                                    <rect key="frame" x="8" y="23" width="60" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="currencyFullName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qp6-AO-x3D">
+                                                    <rect key="frame" x="8" y="80" width="125" height="15"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -82,7 +85,7 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="qp6-AO-x3D" secondAttribute="bottom" constant="-5" id="ZJh-uK-Da9"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="uFG-EU-gMU" secondAttribute="bottom" constant="15" id="bQw-HT-ZNl"/>
                                                 <constraint firstItem="uFG-EU-gMU" firstAttribute="leading" secondItem="QLU-Dc-5lm" secondAttribute="leadingMargin" id="dmG-kJ-SuF"/>
-                                                <constraint firstItem="uFG-EU-gMU" firstAttribute="top" secondItem="QLU-Dc-5lm" secondAttribute="topMargin" constant="10" id="ju3-cK-Vj4"/>
+                                                <constraint firstItem="uFG-EU-gMU" firstAttribute="top" secondItem="QLU-Dc-5lm" secondAttribute="topMargin" id="ju3-cK-Vj4"/>
                                                 <constraint firstItem="RBy-Gk-Bok" firstAttribute="centerY" secondItem="uFG-EU-gMU" secondAttribute="centerY" id="rIo-5A-Rvd"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -96,15 +99,15 @@
                                 </prototypes>
                                 <sections/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tbd-Pc-Uh9">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tbd-Pc-Uh9">
                                 <rect key="frame" x="26" y="24" width="46" height="30"/>
-                                <state key="normal" title="Button">
+                                <state key="normal" title="刷新">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U6J-F7-B9e">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U6J-F7-B9e">
                                 <rect key="frame" x="528" y="24" width="46" height="30"/>
-                                <state key="normal" title="Button">
+                                <state key="normal" title="设置">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -119,12 +122,15 @@
                             <constraint firstItem="Tbd-Pc-Uh9" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="YhL-sb-eHg"/>
                             <constraint firstItem="aQU-aU-PrO" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="aKc-Mg-tH1"/>
                             <constraint firstItem="dsS-zn-YaT" firstAttribute="centerY" secondItem="Tbd-Pc-Uh9" secondAttribute="centerY" id="azI-eB-Krt"/>
-                            <constraint firstItem="aQU-aU-PrO" firstAttribute="top" secondItem="dsS-zn-YaT" secondAttribute="bottom" constant="31" id="hZp-MV-EAO"/>
+                            <constraint firstItem="aQU-aU-PrO" firstAttribute="top" secondItem="dsS-zn-YaT" secondAttribute="bottom" constant="28" id="hZp-MV-EAO"/>
                             <constraint firstItem="dsS-zn-YaT" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="yPG-jo-qMZ"/>
                             <constraint firstItem="dsS-zn-YaT" firstAttribute="centerX" secondItem="aQU-aU-PrO" secondAttribute="centerX" id="zZS-gG-8vS"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="AddCurrency" destination="U6J-F7-B9e" id="WS1-et-vTX"/>
+                        <outlet property="MainUITitle" destination="dsS-zn-YaT" id="Oec-oR-ahS"/>
+                        <outlet property="Refresh" destination="Tbd-Pc-Uh9" id="BOk-dM-ViM"/>
                         <outlet property="tableview" destination="aQU-aU-PrO" id="vah-v8-bKg"/>
                     </connections>
                 </viewController>

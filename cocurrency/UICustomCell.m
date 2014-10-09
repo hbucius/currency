@@ -33,7 +33,10 @@
     [btLayer setMasksToBounds:YES];
     [btLayer setCornerRadius:4.0f];
     [self.currencyImage setBackgroundColor:[UIColor clearColor]];
+    if ([self.inputText canBecomeFirstResponder]) {
+        NSLog(@"Yes, it is true");
     
+    }
     
 }
 
