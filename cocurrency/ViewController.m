@@ -84,10 +84,10 @@
 -(void) setupForDismissKeyboard{
     UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-        [self.view addGestureRecognizer:tapRecognizer];
+        [self.tableview addGestureRecognizer:tapRecognizer];
     }];
     [[NSNotificationCenter defaultCenter]addObserverForName:UIKeyboardDidHideNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-        [self.view removeGestureRecognizer:tapRecognizer];
+        [self.tableview removeGestureRecognizer:tapRecognizer];
     }];
     
     
@@ -159,18 +159,20 @@
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
     NSLog(@"enter into scrollViewWillBeginDragging");
-    [self dismissKeyboard];
+    //first detect whether it is trigger by people
+    if ([UIDevice]) {
+        [self dismissKeyboard];
+    }
 
 }
 #pragma mark UI update actions
 
-
 - (IBAction)inputField:(UITextField *)sender {
-   // NSLog([[[[[sender superview] superview]superview] class] debugDescription]);
+    // NSLog([[[[[sender superview] superview]superview] class] debugDescription]);
     float OSversion=[[[UIDevice currentDevice] systemVersion] floatValue];
     UIView *view;
     if(OSversion >7.0 && OSversion<8.0)
-         view=[[[sender superview] superview]superview];
+        view=[[[sender superview] superview]superview];
     else if (OSversion>=8.0)
         view=[[sender superview]superview];
     else return ;
@@ -180,18 +182,14 @@
         NSLog(@"the %ld",indexpath.row);
         [self updateCellWithIndexPath:indexpath];
     }
+
 }
-
-
-
 
 - (IBAction)inputFieldBeginEdit:(UITextField *)sender {
     self.firstResponder=sender;
     NSLog(@"firstResponder exists22 ,%p",self.firstResponder);
 
 }
-
-
 
 // update other cell 's data source and Text Field Shown , not update itself
 // To use this function ,the data source[row] must be newest
@@ -220,8 +218,9 @@
 #pragma mark help functions
 
 - (void) dismissKeyboard{
+    NSLog(@"I am tring to dismiss Keyboard");
     if(self.firstResponder) {
-        [self.firstResponder resignFirstResponder];
+       [self.firstResponder resignFirstResponder];
         
         self.firstResponder=nil;
     }
