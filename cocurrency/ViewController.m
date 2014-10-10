@@ -37,8 +37,6 @@
     [self setupForDismissKeyboard];
     _tableview.dataSource=self;
     _tableview.delegate=self;
-    sleep(2);
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,7 +91,10 @@
     int row_remain_unchanged=0;
     int row_number_remain_unchanged=1000;
     [_NumberShown replaceObjectAtIndex:row_remain_unchanged withObject:[NSNumber numberWithFloat:row_number_remain_unchanged]];
+    UICustomCell *cell=(UICustomCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row_remain_unchanged inSection:row_number_remain_unchanged]];
+    [self updateCell:cell inputText:row_number_remain_unchanged];
     [self updateOtherCellByRow:row_remain_unchanged];
+    [self performSelectorOnMainThread:@selector(refreshTableView) withObject:nil waitUntilDone:NO];
 }
 -(void) updateUIError{
     
@@ -132,7 +133,7 @@
 }
 
 - (void) updateCell:(UICustomCell *) cellA inputText:(float)currencyNumber{
-    NSLog([NSString stringWithFormat:@"%.2f",currencyNumber]);
+    NSLog(@"updateCell is called");
     if(fabs((float)(int)currencyNumber-currencyNumber)<pow(10, -10))
         cellA.inputText.text=[NSString stringWithFormat:@"%.0f",currencyNumber];
     else
@@ -199,7 +200,7 @@
         [self.NumberShown replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:currencyNumber]];
         UICustomCell *cell_new=(UICustomCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         [self updateCell:cell_new inputText:currencyNumber];
-
+        NSLog(@"cell is updated to %f",currencyNumber);
     }
 }
 

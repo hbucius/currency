@@ -38,8 +38,11 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
     NSURLSessionDataTask *dataTask=[self.session dataTaskWithURL:[NSURL URLWithString:yahoolURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSString *string =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"the data is %@",string);
+        NSLog(@"the data 's address is %@",data);
         self.currency=[self getDicFromObject:data];
-        [self.delegate updateUI];
+        if (self.currency!=nil) [self.delegate updateUI];
+            else [self.delegate updateUIError];
+
     }];
     [dataTask resume];
     
@@ -49,7 +52,6 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
     NSError * error2;
     NSMutableDictionary *mutableDiction=[[NSMutableDictionary alloc]init];
     id jsonObject= [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error2];
-    NSLog(@"the class is %@",[jsonObject class]);
     if([jsonObject isKindOfClass:[NSDictionary class]]) {
         NSDictionary * dictionary =(NSDictionary *) jsonObject;
         id mdic=[dictionary valueForKey:@"list"];
