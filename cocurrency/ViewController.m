@@ -28,15 +28,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [self initCurrencyInfo];
     [self initMainFrameUI];
+    [self initCurrencyFullName];
     [self initCurrencyShow];
     [self initNumberShow];
-    [self initCurrencyInfo];
-    [self initCurrencyFullName];
     [self.info updateInfo];
     [self setupForDismissKeyboard];
     _tableview.dataSource=self;
     _tableview.delegate=self;
+    sleep(2);
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,6 +63,7 @@
     for (int i=0; i<_currencyShown.count; i++) {
         [_NumberShown addObject:[NSNumber numberWithFloat:0]];
     }
+   
     NSLog(@"initNumberShown finished") ;
 }
 
@@ -87,6 +90,10 @@
 
 -(void) updateUI {
     NSLog(@"UI is updated");
+    int row_remain_unchanged=0;
+    int row_number_remain_unchanged=1000;
+    [_NumberShown replaceObjectAtIndex:row_remain_unchanged withObject:[NSNumber numberWithFloat:row_number_remain_unchanged]];
+    [self updateOtherCellByRow:row_remain_unchanged];
 }
 -(void) updateUIError{
     
@@ -105,7 +112,7 @@
     cell.currencyName.text=currencyName;
     cell.currencyFullName.text=[self.currencyFullName getFullCurrencyNameWith:currencyName];
     float currencyNumber=[(NSNumber*)self.NumberShown[indexPath.row] floatValue];
-    cell.inputText.text=[NSString stringWithFormat:@"%.3f",currencyNumber];
+    [self updateCell:cell inputText:currencyNumber];
     return cell;
 }
 
@@ -122,6 +129,14 @@
     return 70.0;
 
 
+}
+
+- (void) updateCell:(UICustomCell *) cellA inputText:(float)currencyNumber{
+    NSLog([NSString stringWithFormat:@"%.2f",currencyNumber]);
+    if(fabs((float)(int)currencyNumber-currencyNumber)<pow(10, -10))
+        cellA.inputText.text=[NSString stringWithFormat:@"%.0f",currencyNumber];
+    else
+        cellA.inputText.text=[NSString stringWithFormat:@"%.2f",currencyNumber];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -157,7 +172,7 @@
         UICustomCell *hotCell=(UICustomCell*)view;
         NSIndexPath *indexpath=[self.tableview indexPathForCell:hotCell];
         NSLog(@"the %ld",indexpath.row);
-        [self updateOtherCellWithIndexPath:indexpath];
+        [self updateCellWithIndexPath:indexpath];
     }
 }
 
@@ -170,21 +185,31 @@
 
 }
 
--  (void) updateOtherCellWithIndexPath:(NSIndexPath*)indexPath{
-    UICustomCell *cell_old=(UICustomCell*)[self.tableview cellForRowAtIndexPath:indexPath];
-    float oldCurrencyNumbr=[cell_old.inputText.text floatValue];
-    NSString *oldCurrencyName=self.currencyShown[indexPath.row];
-    [self.NumberShown replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithFloat:oldCurrencyNumbr]];
+
+
+// update other cell 's data source and Text Field Shown , not update itself
+// To use this function ,the data source[row] must be newest
+-  (void) updateOtherCellByRow:(NSUInteger) row {
+    float oldCurrencyNumbr=[[self.NumberShown objectAtIndex:row]floatValue];
+    NSString *oldCurrencyName=self.currencyShown[row];
     for (int i=0; i<self.currencyShown.count; i++) {
-        if(indexPath.row==i) continue;
+        if(row==i) continue;
         NSString *newCurrencyName=self.currencyShown[i];
         float currencyNumber=[self.info exchangeToCurrency:newCurrencyName withNumber:oldCurrencyNumbr oldCurrency:oldCurrencyName];
         [self.NumberShown replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:currencyNumber]];
         UICustomCell *cell_new=(UICustomCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-        cell_new.inputText.text=[NSString stringWithFormat:@"%.3f",[self.NumberShown[i] floatValue]];
+        [self updateCell:cell_new inputText:currencyNumber];
+
     }
 }
 
+-  (void) updateCellWithIndexPath:(NSIndexPath*)indexPath{
+    UICustomCell *cell_old=(UICustomCell*)[self.tableview cellForRowAtIndexPath:indexPath];
+    float oldCurrencyNumbr=[cell_old.inputText.text floatValue];
+    [self.NumberShown replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithFloat:oldCurrencyNumbr]];
+    [self updateOtherCellByRow:indexPath.row];
+ 
+}
 
 - (void) dismissKeyboard{
     NSLog(@"I am trying to dismiss keyboard");
