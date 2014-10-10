@@ -13,7 +13,6 @@
 
 @interface ViewController  ()
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
-@property (weak, nonatomic) IBOutlet UILabel *MainUITitle;
 @property (weak, nonatomic) IBOutlet UIButton *AddCurrency;
 @property (weak, nonatomic) IBOutlet UIButton *Refresh;
 @property (strong,nonatomic) NSMutableArray   * currencyShown;
@@ -21,6 +20,7 @@
 @property (strong,nonatomic) DownloadInfo * info;
 @property (strong,nonatomic) CurrencyName * currencyFullName;
 @property (strong,nonatomic)  UITextField * firstResponder;
+@property (weak, nonatomic) IBOutlet UINavigationItem *MainUITitle;
 @end
 
 @implementation ViewController
@@ -45,9 +45,8 @@
 }
 
 -(void)initMainFrameUI{
-    self.MainUITitle.text=@"汇率换算";
-    self.AddCurrency.hidden=YES;
-    self.Refresh.titleLabel.text=@"刷新";
+    self.MainUITitle.title=@"汇率换算";
+    
     self.tableview.allowsSelection=false;
     
 }
@@ -147,7 +146,13 @@
 
 - (IBAction)inputField:(UITextField *)sender {
    // NSLog([[[[[sender superview] superview]superview] class] debugDescription]);
-    UIView *view=[[[sender superview] superview]superview];
+    float OSversion=[[[UIDevice currentDevice] systemVersion] floatValue];
+    UIView *view;
+    if(OSversion >7.0 && OSversion<8.0)
+         view=[[[sender superview] superview]superview];
+    else if (OSversion>=8.0)
+        view=[[sender superview]superview];
+    else return ;
     if([view isKindOfClass:[UICustomCell class]]){
         UICustomCell *hotCell=(UICustomCell*)view;
         NSIndexPath *indexpath=[self.tableview indexPathForCell:hotCell];
