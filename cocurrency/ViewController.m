@@ -33,15 +33,22 @@
     [self initCurrencyFullName];
     [self initCurrencyShow];
     [self initNumberShow];
+    [self setDelegateAndSource];
     [self.info updateInfo];
     [self setupForDismissKeyboard];
-    _tableview.dataSource=self;
-    _tableview.delegate=self;
-}
+ }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark init functions
+
+-(void) setDelegateAndSource{
+    
+    _tableview.dataSource=self;
+    _tableview.delegate=self;
 }
 
 -(void)initMainFrameUI{
@@ -140,13 +147,7 @@
         cellA.inputText.text=[NSString stringWithFormat:@"%.2f",currencyNumber];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-   // NSLog(@"the row at %ld is selected",indexPath.row);
-  ///  UICustomCell *cell=(UICustomCell*)[self.tableview cellForRowAtIndexPath:indexPath];
-   // [cell.inputText becomeFirstResponder];
-   // self.firstResponder=cell;
-    
-}
+
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     UICustomCell *cell=(UICustomCell*)[self.tableview cellForRowAtIndexPath:indexPath];
@@ -156,7 +157,11 @@
 
 
 
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSLog(@"enter into scrollViewWillBeginDragging");
+    [self dismissKeyboard];
 
+}
 #pragma mark UI update actions
 
 
@@ -212,12 +217,14 @@
  
 }
 
+#pragma mark help functions
+
 - (void) dismissKeyboard{
-    NSLog(@"I am trying to dismiss keyboard");
-    NSLog(@"the first responder's address is %p",self.firstResponder);
-    [self.firstResponder resignFirstResponder];
-    self.firstResponder=nil;
-    
+    if(self.firstResponder) {
+        [self.firstResponder resignFirstResponder];
+        
+        self.firstResponder=nil;
+    }
 }
 
 -(void) refreshTableView{
