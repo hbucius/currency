@@ -156,15 +156,14 @@
 
 
 
-
+/**
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
     NSLog(@"enter into scrollViewWillBeginDragging");
     //first detect whether it is trigger by people
-    if ([UIDevice]) {
-        [self dismissKeyboard];
-    }
+  
 
 }
+ */
 #pragma mark UI update actions
 
 - (IBAction)inputField:(UITextField *)sender {
