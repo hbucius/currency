@@ -21,6 +21,7 @@
 @property (strong,nonatomic) CurrencyName * currencyFullName;
 @property (strong,nonatomic)  UITextField * firstResponder;
 @property (weak, nonatomic) IBOutlet UINavigationItem *MainUITitle;
+@property( assign,nonatomic) BOOL keyBoardShown;
 @end
 
 @implementation ViewController
@@ -85,9 +86,11 @@
     UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         [self.tableview addGestureRecognizer:tapRecognizer];
+        self.keyBoardShown=YES;
     }];
     [[NSNotificationCenter defaultCenter]addObserverForName:UIKeyboardDidHideNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         [self.tableview removeGestureRecognizer:tapRecognizer];
+        self.keyBoardShown=NO;
     }];
     
     
@@ -149,25 +152,23 @@
 
 
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UICustomCell *cell=(UICustomCell*)[self.tableview cellForRowAtIndexPath:indexPath];
-    cell.highlighted=NO;
-}
-
-
-
 /**
+
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
     NSLog(@"enter into scrollViewWillBeginDragging");
     //first detect whether it is trigger by people
-  
+   
+    [self dismissKeyboard];
 
 }
- */
+
+**/
+
 #pragma mark UI update actions
 
 - (IBAction)inputField:(UITextField *)sender {
     // NSLog([[[[[sender superview] superview]superview] class] debugDescription]);
+    NSLog(@"input Field is called");
     float OSversion=[[[UIDevice currentDevice] systemVersion] floatValue];
     UIView *view;
     if(OSversion >7.0 && OSversion<8.0)
@@ -189,6 +190,15 @@
     NSLog(@"firstResponder exists22 ,%p",self.firstResponder);
 
 }
+
+- (IBAction)TouchDown:(UITextField *)sender {
+    NSLog(@"I am touching down");
+  //  BOOL abc=[sender becomeFirstResponder];
+  //  if (abc) {
+  //      NSLog(@"abc is true");
+  ///  }
+}
+
 
 // update other cell 's data source and Text Field Shown , not update itself
 // To use this function ,the data source[row] must be newest
@@ -218,7 +228,7 @@
 
 - (void) dismissKeyboard{
     NSLog(@"I am tring to dismiss Keyboard");
-    if(self.firstResponder) {
+    if(self.firstResponder && self.keyBoardShown) {
        [self.firstResponder resignFirstResponder];
         
         self.firstResponder=nil;

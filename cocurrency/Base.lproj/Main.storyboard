@@ -11,7 +11,7 @@
         <scene sceneID="30C-uw-kn0">
             <objects>
                 <tableViewController id="fIk-bY-mcv" customClass="ViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jrj-sG-zPA">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jrj-sG-zPA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -33,6 +33,7 @@
                                             <fontDescription key="fontDescription" name="GujaratiSangamMN" family="Gujarati Sangam MN" pointSize="24"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" keyboardAppearance="alert"/>
                                             <connections>
+                                                <action selector="TouchDown:" destination="fIk-bY-mcv" eventType="touchDown" id="Q0e-bN-5bo"/>
                                                 <action selector="inputField:" destination="fIk-bY-mcv" eventType="editingChanged" id="68b-Ig-Z2o"/>
                                                 <action selector="inputFieldBeginEdit:" destination="fIk-bY-mcv" eventType="editingDidBegin" id="Dqo-pK-jXr"/>
                                             </connections>
