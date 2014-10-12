@@ -53,7 +53,7 @@
 }
 
 -(void)initMainFrameUI{
-    self.MainUITitle.title=@"汇率换算";
+    self.MainUITitle.title=@"常见汇率换算";
     
     self.tableview.allowsSelection=false;
     
