@@ -8,13 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import "UIUpdateFromSession.h"
+#import <CoreData/CoreData.h>
 
 @interface DownloadInfo : NSObject
 
 @property(strong,nonatomic) NSURLSession * session;
 @property (strong,nonatomic) id <UIUpdateFromSession> delegate ;
+@property(strong,nonatomic,readonly) NSDictionary *currency;
 
 -(instancetype) initWithDelegate:(id) delegate;
 -(void) updateInfo ;
 -(float) exchangeToCurrency:(NSString*) newCurrencyName withNumber:(float) number oldCurrency:(NSString*) oldCurrencyName;
+
 @end

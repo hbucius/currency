@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		021EA13719EB934E005F0210 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021EA13619EB934E005F0210 /* Foundation.framework */; };
+		021EA13919EB9365005F0210 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021EA13819EB9365005F0210 /* UIKit.framework */; };
+		021EA13B19EB946C005F0210 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021EA13A19EB946C005F0210 /* CoreGraphics.framework */; };
+		021EA13D19EB9473005F0210 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021EA13C19EB9473005F0210 /* QuartzCore.framework */; };
+		021EA13F19EB947A005F0210 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021EA13E19EB947A005F0210 /* CoreData.framework */; };
+		021EA14219EB9D07005F0210 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 021EA14019EB9D07005F0210 /* Model.xcdatamodeld */; };
+		021EA14519EB9D80005F0210 /* CurrencyRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 021EA14419EB9D80005F0210 /* CurrencyRate.m */; };
+		021EA15419EBAB6C005F0210 /* CurrencyRate+Update.m in Sources */ = {isa = PBXBuildFile; fileRef = 021EA15319EBAB6C005F0210 /* CurrencyRate+Update.m */; };
 		02FA8C1B19D7ED280053342B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA8C1A19D7ED280053342B /* main.m */; };
 		02FA8C1E19D7ED280053342B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA8C1D19D7ED280053342B /* AppDelegate.m */; };
 		02FA8C2119D7ED280053342B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA8C2019D7ED280053342B /* ViewController.m */; };
@@ -29,27 +37,37 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		021EA13619EB934E005F0210 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		021EA13819EB9365005F0210 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		021EA13A19EB946C005F0210 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		021EA13C19EB9473005F0210 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		021EA13E19EB947A005F0210 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		021EA14119EB9D07005F0210 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		021EA14319EB9D80005F0210 /* CurrencyRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrencyRate.h; path = cocurrency/CurrencyRate.h; sourceTree = "<group>"; };
+		021EA14419EB9D80005F0210 /* CurrencyRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrencyRate.m; path = cocurrency/CurrencyRate.m; sourceTree = "<group>"; };
+		021EA15219EBAB6C005F0210 /* CurrencyRate+Update.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CurrencyRate+Update.h"; path = "cocurrency/CurrencyRate+Update.h"; sourceTree = "<group>"; };
+		021EA15319EBAB6C005F0210 /* CurrencyRate+Update.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CurrencyRate+Update.m"; path = "cocurrency/CurrencyRate+Update.m"; sourceTree = "<group>"; };
 		02FA8C1519D7ED280053342B /* cocurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cocurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FA8C1919D7ED280053342B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02FA8C1A19D7ED280053342B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		02FA8C1C19D7ED280053342B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		02FA8C1D19D7ED280053342B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		02FA8C1F19D7ED280053342B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		02FA8C2019D7ED280053342B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		02FA8C1F19D7ED280053342B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = cocurrency/ViewController.h; sourceTree = "<group>"; };
+		02FA8C2019D7ED280053342B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = cocurrency/ViewController.m; sourceTree = "<group>"; };
 		02FA8C2319D7ED280053342B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		02FA8C2519D7ED280053342B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		02FA8C2819D7ED280053342B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		02FA8C3E19D80F8F0053342B /* DownloadInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadInfo.h; sourceTree = "<group>"; };
-		02FA8C3F19D80F8F0053342B /* DownloadInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadInfo.m; sourceTree = "<group>"; };
-		02FA8C4119D8FD770053342B /* UIUpdateFromSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIUpdateFromSession.h; sourceTree = "<group>"; };
+		02FA8C3E19D80F8F0053342B /* DownloadInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DownloadInfo.h; path = cocurrency/DownloadInfo.h; sourceTree = "<group>"; };
+		02FA8C3F19D80F8F0053342B /* DownloadInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DownloadInfo.m; path = cocurrency/DownloadInfo.m; sourceTree = "<group>"; };
+		02FA8C4119D8FD770053342B /* UIUpdateFromSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIUpdateFromSession.h; path = cocurrency/UIUpdateFromSession.h; sourceTree = "<group>"; };
 		5A09012519E444E4007653C2 /* CNY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CNY.png; sourceTree = "<group>"; };
-		5A09012719E448CC007653C2 /* UICustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomCell.h; sourceTree = "<group>"; };
-		5A09012819E448CC007653C2 /* UICustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomCell.m; sourceTree = "<group>"; };
+		5A09012719E448CC007653C2 /* UICustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICustomCell.h; path = cocurrency/UICustomCell.h; sourceTree = "<group>"; };
+		5A09012819E448CC007653C2 /* UICustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICustomCell.m; path = cocurrency/UICustomCell.m; sourceTree = "<group>"; };
 		5A217E9119E599AD009FB91F /* EUR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EUR.png; sourceTree = "<group>"; };
 		5A217E9219E599AD009FB91F /* HKD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HKD.png; sourceTree = "<group>"; };
 		5A217E9319E599AD009FB91F /* USD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = USD.png; sourceTree = "<group>"; };
-		5A217E9A19E5A302009FB91F /* CurrencyName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyName.h; sourceTree = "<group>"; };
-		5A217E9B19E5A302009FB91F /* CurrencyName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyName.m; sourceTree = "<group>"; };
+		5A217E9A19E5A302009FB91F /* CurrencyName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrencyName.h; path = cocurrency/CurrencyName.h; sourceTree = "<group>"; };
+		5A217E9B19E5A302009FB91F /* CurrencyName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrencyName.m; path = cocurrency/CurrencyName.m; sourceTree = "<group>"; };
 		5A217E9D19E708CE009FB91F /* CAD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CAD.png; sourceTree = "<group>"; };
 		5A217E9E19E708CE009FB91F /* GBP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GBP.png; sourceTree = "<group>"; };
 		5A217E9F19E708CE009FB91F /* JPY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JPY.png; sourceTree = "<group>"; };
@@ -63,15 +81,72 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				021EA13F19EB947A005F0210 /* CoreData.framework in Frameworks */,
+				021EA13D19EB9473005F0210 /* QuartzCore.framework in Frameworks */,
+				021EA13B19EB946C005F0210 /* CoreGraphics.framework in Frameworks */,
+				021EA13919EB9365005F0210 /* UIKit.framework in Frameworks */,
+				021EA13719EB934E005F0210 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		021EA15519EBAC3B005F0210 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				02FA8C3E19D80F8F0053342B /* DownloadInfo.h */,
+				02FA8C3F19D80F8F0053342B /* DownloadInfo.m */,
+				02FA8C4119D8FD770053342B /* UIUpdateFromSession.h */,
+				02FA8C1F19D7ED280053342B /* ViewController.h */,
+				02FA8C2019D7ED280053342B /* ViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		021EA15619EBAC46005F0210 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				02FA8C2219D7ED280053342B /* Main.storyboard */,
+				5A09012719E448CC007653C2 /* UICustomCell.h */,
+				5A09012819E448CC007653C2 /* UICustomCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		021EA15719EBAC4E005F0210 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5A217E9A19E5A302009FB91F /* CurrencyName.h */,
+				5A217E9B19E5A302009FB91F /* CurrencyName.m */,
+				021EA15219EBAB6C005F0210 /* CurrencyRate+Update.h */,
+				021EA15319EBAB6C005F0210 /* CurrencyRate+Update.m */,
+				021EA14019EB9D07005F0210 /* Model.xcdatamodeld */,
+				021EA14319EB9D80005F0210 /* CurrencyRate.h */,
+				021EA14419EB9D80005F0210 /* CurrencyRate.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		021EA15919EBACCC005F0210 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				021EA13619EB934E005F0210 /* Foundation.framework */,
+				021EA13819EB9365005F0210 /* UIKit.framework */,
+				021EA13A19EB946C005F0210 /* CoreGraphics.framework */,
+				021EA13C19EB9473005F0210 /* QuartzCore.framework */,
+				021EA13E19EB947A005F0210 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		02FA8C0C19D7ED280053342B = {
 			isa = PBXGroup;
 			children = (
+				021EA15919EBACCC005F0210 /* Frameworks */,
+				021EA15719EBAC4E005F0210 /* Models */,
+				021EA15619EBAC46005F0210 /* Views */,
+				021EA15519EBAC3B005F0210 /* Controllers */,
 				5A09012419E444E4007653C2 /* images */,
 				02FA8C1719D7ED280053342B /* cocurrency */,
 				02FA8C1619D7ED280053342B /* Products */,
@@ -89,17 +164,6 @@
 		02FA8C1719D7ED280053342B /* cocurrency */ = {
 			isa = PBXGroup;
 			children = (
-				5A217E9A19E5A302009FB91F /* CurrencyName.h */,
-				5A217E9B19E5A302009FB91F /* CurrencyName.m */,
-				02FA8C3E19D80F8F0053342B /* DownloadInfo.h */,
-				02FA8C3F19D80F8F0053342B /* DownloadInfo.m */,
-				5A09012719E448CC007653C2 /* UICustomCell.h */,
-				5A09012819E448CC007653C2 /* UICustomCell.m */,
-				02FA8C1C19D7ED280053342B /* AppDelegate.h */,
-				02FA8C1D19D7ED280053342B /* AppDelegate.m */,
-				02FA8C1F19D7ED280053342B /* ViewController.h */,
-				02FA8C2019D7ED280053342B /* ViewController.m */,
-				02FA8C2219D7ED280053342B /* Main.storyboard */,
 				02FA8C2519D7ED280053342B /* Images.xcassets */,
 				02FA8C2719D7ED280053342B /* LaunchScreen.xib */,
 				02FA8C1819D7ED280053342B /* Supporting Files */,
@@ -110,9 +174,10 @@
 		02FA8C1819D7ED280053342B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				02FA8C1C19D7ED280053342B /* AppDelegate.h */,
+				02FA8C1D19D7ED280053342B /* AppDelegate.m */,
 				02FA8C1919D7ED280053342B /* Info.plist */,
 				02FA8C1A19D7ED280053342B /* main.m */,
-				02FA8C4119D8FD770053342B /* UIUpdateFromSession.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -215,9 +280,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				021EA14519EB9D80005F0210 /* CurrencyRate.m in Sources */,
+				021EA15419EBAB6C005F0210 /* CurrencyRate+Update.m in Sources */,
 				02FA8C2119D7ED280053342B /* ViewController.m in Sources */,
 				5A217E9C19E5A302009FB91F /* CurrencyName.m in Sources */,
 				5A09012919E448CC007653C2 /* UICustomCell.m in Sources */,
+				021EA14219EB9D07005F0210 /* Model.xcdatamodeld in Sources */,
 				02FA8C4019D80F8F0053342B /* DownloadInfo.m in Sources */,
 				02FA8C1E19D7ED280053342B /* AppDelegate.m in Sources */,
 				02FA8C1B19D7ED280053342B /* main.m in Sources */,
@@ -233,6 +301,7 @@
 				02FA8C2319D7ED280053342B /* Base */,
 			);
 			name = Main.storyboard;
+			path = cocurrency;
 			sourceTree = "<group>";
 		};
 		02FA8C2719D7ED280053342B /* LaunchScreen.xib */ = {
@@ -370,6 +439,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		021EA14019EB9D07005F0210 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				021EA14119EB9D07005F0210 /* Model.xcdatamodel */,
+			);
+			currentVersion = 021EA14119EB9D07005F0210 /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = cocurrency/Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 02FA8C0D19D7ED280053342B /* Project object */;
 }

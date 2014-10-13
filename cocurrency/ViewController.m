@@ -22,6 +22,7 @@
 @property (strong,nonatomic)  UITextField * firstResponder;
 @property (weak, nonatomic) IBOutlet UINavigationItem *MainUITitle;
 @property( assign,nonatomic) BOOL keyBoardShown;
+@property (assign,nonatomic) BOOL NumberShownInited;
 @end
 
 @implementation ViewController
@@ -35,7 +36,6 @@
     [self initCurrencyShow];
     [self initNumberShow];
     [self setDelegateAndSource];
-    [self.info updateInfo];
     [self setupForDismissKeyboard];
  }
 
@@ -66,11 +66,23 @@
 }
 - (void) initNumberShow{
     _NumberShown=[[NSMutableArray alloc]init];
-    for (int i=0; i<_currencyShown.count; i++) {
-        [_NumberShown addObject:[NSNumber numberWithFloat:0]];
+
+    if(!self.info.currency)
+    {
+        for (int i=0; i<_currencyShown.count; i++)
+            [_NumberShown addObject:[NSNumber numberWithFloat:0]];
+        self.NumberShownInited=NO;
     }
-   
-    NSLog(@"initNumberShown finished") ;
+    else{
+        int row_remain_unchanged=0;
+        int row_number_remain_unchanged=1000;
+        for (int i=0; i<_currencyShown.count; i++){
+            float temp=[self.info exchangeToCurrency:self.currencyShown[i] withNumber:row_number_remain_unchanged oldCurrency:self.currencyShown[row_remain_unchanged]];
+            [_NumberShown addObject:[NSNumber numberWithFloat:temp]];
+        }
+        self.NumberShownInited=YES;
+    }
+    NSLog(@"initNumberShown finished");
 }
 
 -(void) initCurrencyInfo{
@@ -99,10 +111,17 @@
 -(void) updateUI {
     NSLog(@"UI is updated");
     int row_remain_unchanged=0;
-    int row_number_remain_unchanged=1000;
-    [_NumberShown replaceObjectAtIndex:row_remain_unchanged withObject:[NSNumber numberWithFloat:row_number_remain_unchanged]];
+    int row_number_remain_unchanged;
     UICustomCell *cell=(UICustomCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row_remain_unchanged inSection:row_number_remain_unchanged]];
-    [self updateCell:cell inputText:row_number_remain_unchanged];
+    if(self.NumberShownInited){
+        row_number_remain_unchanged=[cell.inputText.text floatValue];
+    }
+    else {
+        row_number_remain_unchanged=1000;
+        [self updateCell:cell inputText:row_number_remain_unchanged];
+        [_NumberShown replaceObjectAtIndex:row_remain_unchanged withObject:[NSNumber numberWithFloat:row_number_remain_unchanged]];
+
+    }
     [self updateOtherCellByRow:row_remain_unchanged];
     [self performSelectorOnMainThread:@selector(refreshTableView) withObject:nil waitUntilDone:NO];
 }
@@ -118,7 +137,7 @@
     NSString *reuseIdentifier=@"tableCell";
     UICustomCell *cell=[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     NSString *currencyName=[self.currencyShown objectAtIndex:indexPath.row];
-    NSLog(@"the currency name is %@, the row is %ld",currencyName,indexPath.row);
+    NSLog(@"the currency name is %@, the row is %ld",currencyName,(long)indexPath.row);
     cell.currencyImage.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@.png",currencyName]];
     cell.currencyName.text=currencyName;
     cell.currencyFullName.text=[self.currencyFullName getFullCurrencyNameWith:currencyName];
@@ -179,7 +198,7 @@
     if([view isKindOfClass:[UICustomCell class]]){
         UICustomCell *hotCell=(UICustomCell*)view;
         NSIndexPath *indexpath=[self.tableview indexPathForCell:hotCell];
-        NSLog(@"the %ld",indexpath.row);
+        NSLog(@"the %ld",(long)indexpath.row);
         [self updateCellWithIndexPath:indexpath];
     }
 

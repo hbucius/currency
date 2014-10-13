@@ -7,15 +7,15 @@
 //
 
 #import "DownloadInfo.h"
-
+#import <CoreData/CoreData.h>
+#import <UIKit/UIKit.h>
+#import "CurrencyRate+Update.h"
+#import "AppDelegate.h"
 NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrencies/quote?format=json&";
 
 @interface DownloadInfo ()
 - (NSDictionary *) getDicFromObject :(NSData *) data;
-
-@property(strong,nonatomic) NSDictionary *currency;
-
-
+@property(strong,nonatomic,readwrite) NSDictionary *currency;
 @end
 
 
@@ -28,10 +28,15 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
     if(self) {
         _session=[NSURLSession sharedSession];
         _delegate=delegate;
+        [self initCurrencyDic];
      }
     return self;
 }
 
+- (void) initCurrencyDic{
+    self.currency=[CurrencyRate getRateFromCoreData];
+  //  [self updateInfo];
+}
 
 
 - (void) updateInfo {
@@ -39,8 +44,11 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
         NSString *string =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"the data is %@",string);
         NSLog(@"the data 's address is %@",data);
-        self.currency=[self getDicFromObject:data];
-        if (self.currency!=nil) [self.delegate updateUI];
+        if (self.currency!=nil) {
+            self.currency=[self getDicFromObject:data];
+            [CurrencyRate updateCoreData:self.currency];
+            [self.delegate updateUI];
+        }
             else [self.delegate updateUIError];
 
     }];
