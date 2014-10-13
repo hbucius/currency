@@ -22,13 +22,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hYK-zW-hMe">
-                                            <rect key="frame" x="18" y="13" width="62" height="62"/>
+                                            <rect key="frame" x="18" y="13" width="77" height="77"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="hYK-zW-hMe" secondAttribute="height" multiplier="1:1" id="aGw-ub-5qz"/>
                                             </constraints>
                                         </imageView>
                                         <textField autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" textAlignment="right" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="g5e-4e-ZjM" userLabel="No Border Style Text Field">
-                                            <rect key="frame" x="164" y="8" width="408" height="82"/>
+                                            <rect key="frame" x="216" y="8" width="356" height="82"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="GujaratiSangamMN" family="Gujarati Sangam MN" pointSize="24"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" keyboardAppearance="alert"/>
@@ -38,13 +38,13 @@
                                                 <action selector="inputFieldBeginEdit:" destination="fIk-bY-mcv" eventType="editingDidBegin" id="Dqo-pK-jXr"/>
                                             </connections>
                                         </textField>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJ1-MH-mZc">
-                                            <rect key="frame" x="95" y="13" width="49" height="62"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJ1-MH-mZc">
+                                            <rect key="frame" x="110" y="18" width="86" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="currencyFullName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="niR-uE-bW6">
-                                            <rect key="frame" x="18" y="80" width="126" height="15"/>
+                                            <rect key="frame" x="110" y="42" width="86" height="48"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -54,16 +54,15 @@
                                         <constraint firstItem="TJ1-MH-mZc" firstAttribute="leading" secondItem="hYK-zW-hMe" secondAttribute="trailing" constant="15" id="Cac-Qd-HCx"/>
                                         <constraint firstItem="hYK-zW-hMe" firstAttribute="leading" secondItem="1pw-2P-h4O" secondAttribute="leadingMargin" constant="10" id="EO4-YM-EC2"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="g5e-4e-ZjM" secondAttribute="bottom" id="GgO-6g-vSM"/>
-                                        <constraint firstItem="niR-uE-bW6" firstAttribute="top" secondItem="hYK-zW-hMe" secondAttribute="bottom" constant="5" id="Jww-bo-Anc"/>
+                                        <constraint firstItem="TJ1-MH-mZc" firstAttribute="top" secondItem="1pw-2P-h4O" secondAttribute="topMargin" constant="10" id="HAJ-Z2-EW4"/>
                                         <constraint firstItem="niR-uE-bW6" firstAttribute="trailing" secondItem="TJ1-MH-mZc" secondAttribute="trailing" id="Lcm-ew-Auv"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="niR-uE-bW6" secondAttribute="bottom" constant="-5" id="MGv-RH-QkX"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="hYK-zW-hMe" secondAttribute="bottom" constant="15" id="XxH-30-l0j"/>
-                                        <constraint firstItem="TJ1-MH-mZc" firstAttribute="centerY" secondItem="hYK-zW-hMe" secondAttribute="centerY" id="cPZ-Ge-a3C"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="niR-uE-bW6" secondAttribute="bottom" id="MGv-RH-QkX"/>
+                                        <constraint firstItem="niR-uE-bW6" firstAttribute="leading" secondItem="TJ1-MH-mZc" secondAttribute="leading" id="PcR-X2-mUM"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="hYK-zW-hMe" secondAttribute="bottom" id="XxH-30-l0j"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="g5e-4e-ZjM" secondAttribute="trailing" constant="20" id="e4x-AX-Eur"/>
                                         <constraint firstItem="g5e-4e-ZjM" firstAttribute="top" secondItem="1pw-2P-h4O" secondAttribute="topMargin" id="fgu-RK-8pv"/>
-                                        <constraint firstItem="niR-uE-bW6" firstAttribute="top" secondItem="TJ1-MH-mZc" secondAttribute="bottom" constant="5" id="l8Z-YW-czt"/>
+                                        <constraint firstItem="niR-uE-bW6" firstAttribute="top" secondItem="TJ1-MH-mZc" secondAttribute="bottom" id="ggb-Ee-BqV"/>
                                         <constraint firstItem="g5e-4e-ZjM" firstAttribute="leading" secondItem="TJ1-MH-mZc" secondAttribute="trailing" constant="20" id="p7h-Y2-0dV"/>
-                                        <constraint firstItem="niR-uE-bW6" firstAttribute="leading" secondItem="hYK-zW-hMe" secondAttribute="leading" id="t9W-1y-Z3n"/>
                                         <constraint firstItem="hYK-zW-hMe" firstAttribute="top" secondItem="1pw-2P-h4O" secondAttribute="topMargin" constant="5" id="tOI-mm-Gvp"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -88,7 +87,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dsd-0R-8zJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1582" y="832"/>
+            <point key="canvasLocation" x="1582" y="831"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nO3-gW-oXa">
