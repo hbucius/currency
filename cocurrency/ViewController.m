@@ -100,11 +100,16 @@
     NSLog(@"UI is updated");
     int row_remain_unchanged=0;
     int row_number_remain_unchanged=1000;
-    [_NumberShown replaceObjectAtIndex:row_remain_unchanged withObject:[NSNumber numberWithFloat:row_number_remain_unchanged]];
-    UICustomCell *cell=(UICustomCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row_remain_unchanged inSection:row_number_remain_unchanged]];
-    [self updateCell:cell inputText:row_number_remain_unchanged];
-    [self updateOtherCellByRow:row_remain_unchanged];
-    [self performSelectorOnMainThread:@selector(refreshTableView) withObject:nil waitUntilDone:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.firstResponder) return;
+        [_NumberShown replaceObjectAtIndex:row_remain_unchanged withObject:[NSNumber numberWithFloat:row_number_remain_unchanged]];
+        UICustomCell *cell=(UICustomCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row_remain_unchanged inSection:row_number_remain_unchanged]];
+        [self updateCell:cell inputText:row_number_remain_unchanged];
+        [self updateOtherCellByRow:row_remain_unchanged];
+        [self refreshTableView];
+        
+    });
+   
 }
 -(void) updateUIError{
     
@@ -238,6 +243,7 @@
 -(void) refreshTableView{
     
     [self.tableview reloadData];
+    
 }
 
 @end
