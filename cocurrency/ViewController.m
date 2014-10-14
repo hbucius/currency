@@ -176,7 +176,7 @@
     NSLog(@"input Field is called");
     float OSversion=[[[UIDevice currentDevice] systemVersion] floatValue];
     UIView *view;
-    if(OSversion >7.0 && OSversion<8.0)
+    if(OSversion >=7.0 && OSversion<8.0)
         view=[[[sender superview] superview]superview];
     else if (OSversion>=8.0)
         view=[[sender superview]superview];
