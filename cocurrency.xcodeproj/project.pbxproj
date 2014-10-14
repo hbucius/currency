@@ -14,22 +14,22 @@
 		02FA8C2619D7ED280053342B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02FA8C2519D7ED280053342B /* Images.xcassets */; };
 		02FA8C2919D7ED280053342B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02FA8C2719D7ED280053342B /* LaunchScreen.xib */; };
 		02FA8C4019D80F8F0053342B /* DownloadInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA8C3F19D80F8F0053342B /* DownloadInfo.m */; };
-		5A09012619E444E4007653C2 /* CNY.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A09012519E444E4007653C2 /* CNY.png */; };
 		5A09012919E448CC007653C2 /* UICustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A09012819E448CC007653C2 /* UICustomCell.m */; };
-		5A217E9419E599AD009FB91F /* EUR.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A217E9119E599AD009FB91F /* EUR.png */; };
-		5A217E9519E599AD009FB91F /* HKD.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A217E9219E599AD009FB91F /* HKD.png */; };
-		5A217E9619E599AD009FB91F /* USD.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A217E9319E599AD009FB91F /* USD.png */; };
 		5A217E9C19E5A302009FB91F /* CurrencyName.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A217E9B19E5A302009FB91F /* CurrencyName.m */; };
-		5A217EA319E708CE009FB91F /* CAD.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A217E9D19E708CE009FB91F /* CAD.png */; };
-		5A217EA419E708CE009FB91F /* GBP.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A217E9E19E708CE009FB91F /* GBP.png */; };
-		5A217EA519E708CE009FB91F /* JPY.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A217E9F19E708CE009FB91F /* JPY.png */; };
-		5A217EA619E708CE009FB91F /* KRW.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A217EA019E708CE009FB91F /* KRW.png */; };
-		5A217EA719E708CE009FB91F /* MOP.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A217EA119E708CE009FB91F /* MOP.png */; };
-		5A217EA819E708CE009FB91F /* TWD.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A217EA219E708CE009FB91F /* TWD.png */; };
+		5ACB50CA19ECADF100F82DA5 /* CAD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB50BE19ECADF100F82DA5 /* CAD@2x.png */; };
+		5ACB50CB19ECADF100F82DA5 /* CNY@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB50BF19ECADF100F82DA5 /* CNY@2x.png */; };
+		5ACB50CC19ECADF100F82DA5 /* EUR@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB50C019ECADF100F82DA5 /* EUR@2x.png */; };
+		5ACB50CD19ECADF100F82DA5 /* GBP@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB50C119ECADF100F82DA5 /* GBP@2x.png */; };
+		5ACB50CE19ECADF100F82DA5 /* HKD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB50C219ECADF100F82DA5 /* HKD@2x.png */; };
+		5ACB50CF19ECADF100F82DA5 /* JPY@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB50C319ECADF100F82DA5 /* JPY@2x.png */; };
+		5ACB50D019ECADF100F82DA5 /* KRW@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB50C419ECADF100F82DA5 /* KRW@2x.png */; };
+		5ACB50D319ECADF100F82DA5 /* MOP@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB50C719ECADF100F82DA5 /* MOP@2x.png */; };
+		5ACB50D419ECADF100F82DA5 /* TWD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB50C819ECADF100F82DA5 /* TWD@2x.png */; };
+		5ACB50D519ECADF100F82DA5 /* USD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB50C919ECADF100F82DA5 /* USD@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		02FA8C1519D7ED280053342B /* cocurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cocurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		02FA8C1519D7ED280053342B /* 汇率换算.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "汇率换算.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FA8C1919D7ED280053342B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02FA8C1A19D7ED280053342B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		02FA8C1C19D7ED280053342B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -42,20 +42,20 @@
 		02FA8C3E19D80F8F0053342B /* DownloadInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadInfo.h; sourceTree = "<group>"; };
 		02FA8C3F19D80F8F0053342B /* DownloadInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadInfo.m; sourceTree = "<group>"; };
 		02FA8C4119D8FD770053342B /* UIUpdateFromSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIUpdateFromSession.h; sourceTree = "<group>"; };
-		5A09012519E444E4007653C2 /* CNY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CNY.png; sourceTree = "<group>"; };
 		5A09012719E448CC007653C2 /* UICustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomCell.h; sourceTree = "<group>"; };
 		5A09012819E448CC007653C2 /* UICustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomCell.m; sourceTree = "<group>"; };
-		5A217E9119E599AD009FB91F /* EUR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EUR.png; sourceTree = "<group>"; };
-		5A217E9219E599AD009FB91F /* HKD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HKD.png; sourceTree = "<group>"; };
-		5A217E9319E599AD009FB91F /* USD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = USD.png; sourceTree = "<group>"; };
 		5A217E9A19E5A302009FB91F /* CurrencyName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyName.h; sourceTree = "<group>"; };
 		5A217E9B19E5A302009FB91F /* CurrencyName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyName.m; sourceTree = "<group>"; };
-		5A217E9D19E708CE009FB91F /* CAD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CAD.png; sourceTree = "<group>"; };
-		5A217E9E19E708CE009FB91F /* GBP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GBP.png; sourceTree = "<group>"; };
-		5A217E9F19E708CE009FB91F /* JPY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JPY.png; sourceTree = "<group>"; };
-		5A217EA019E708CE009FB91F /* KRW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KRW.png; sourceTree = "<group>"; };
-		5A217EA119E708CE009FB91F /* MOP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MOP.png; sourceTree = "<group>"; };
-		5A217EA219E708CE009FB91F /* TWD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWD.png; sourceTree = "<group>"; };
+		5ACB50BE19ECADF100F82DA5 /* CAD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CAD@2x.png"; sourceTree = "<group>"; };
+		5ACB50BF19ECADF100F82DA5 /* CNY@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CNY@2x.png"; sourceTree = "<group>"; };
+		5ACB50C019ECADF100F82DA5 /* EUR@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EUR@2x.png"; sourceTree = "<group>"; };
+		5ACB50C119ECADF100F82DA5 /* GBP@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GBP@2x.png"; sourceTree = "<group>"; };
+		5ACB50C219ECADF100F82DA5 /* HKD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HKD@2x.png"; sourceTree = "<group>"; };
+		5ACB50C319ECADF100F82DA5 /* JPY@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JPY@2x.png"; sourceTree = "<group>"; };
+		5ACB50C419ECADF100F82DA5 /* KRW@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "KRW@2x.png"; sourceTree = "<group>"; };
+		5ACB50C719ECADF100F82DA5 /* MOP@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MOP@2x.png"; sourceTree = "<group>"; };
+		5ACB50C819ECADF100F82DA5 /* TWD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWD@2x.png"; sourceTree = "<group>"; };
+		5ACB50C919ECADF100F82DA5 /* USD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "USD@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +81,7 @@
 		02FA8C1619D7ED280053342B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				02FA8C1519D7ED280053342B /* cocurrency.app */,
+				02FA8C1519D7ED280053342B /* 汇率换算.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -120,16 +120,16 @@
 		5A09012419E444E4007653C2 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				5A217E9D19E708CE009FB91F /* CAD.png */,
-				5A217E9E19E708CE009FB91F /* GBP.png */,
-				5A217E9F19E708CE009FB91F /* JPY.png */,
-				5A217EA019E708CE009FB91F /* KRW.png */,
-				5A217EA119E708CE009FB91F /* MOP.png */,
-				5A217EA219E708CE009FB91F /* TWD.png */,
-				5A217E9119E599AD009FB91F /* EUR.png */,
-				5A217E9219E599AD009FB91F /* HKD.png */,
-				5A217E9319E599AD009FB91F /* USD.png */,
-				5A09012519E444E4007653C2 /* CNY.png */,
+				5ACB50BE19ECADF100F82DA5 /* CAD@2x.png */,
+				5ACB50BF19ECADF100F82DA5 /* CNY@2x.png */,
+				5ACB50C019ECADF100F82DA5 /* EUR@2x.png */,
+				5ACB50C119ECADF100F82DA5 /* GBP@2x.png */,
+				5ACB50C219ECADF100F82DA5 /* HKD@2x.png */,
+				5ACB50C319ECADF100F82DA5 /* JPY@2x.png */,
+				5ACB50C419ECADF100F82DA5 /* KRW@2x.png */,
+				5ACB50C719ECADF100F82DA5 /* MOP@2x.png */,
+				5ACB50C819ECADF100F82DA5 /* TWD@2x.png */,
+				5ACB50C919ECADF100F82DA5 /* USD@2x.png */,
 			);
 			name = images;
 			path = cocurrency/images;
@@ -152,7 +152,7 @@
 			);
 			name = cocurrency;
 			productName = cocurrency;
-			productReference = 02FA8C1519D7ED280053342B /* cocurrency.app */;
+			productReference = 02FA8C1519D7ED280053342B /* 汇率换算.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -192,19 +192,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A217EA419E708CE009FB91F /* GBP.png in Resources */,
-				5A217EA619E708CE009FB91F /* KRW.png in Resources */,
-				5A217EA519E708CE009FB91F /* JPY.png in Resources */,
-				5A09012619E444E4007653C2 /* CNY.png in Resources */,
-				5A217EA819E708CE009FB91F /* TWD.png in Resources */,
+				5ACB50D419ECADF100F82DA5 /* TWD@2x.png in Resources */,
 				02FA8C2419D7ED280053342B /* Main.storyboard in Resources */,
-				5A217EA319E708CE009FB91F /* CAD.png in Resources */,
-				5A217EA719E708CE009FB91F /* MOP.png in Resources */,
+				5ACB50CD19ECADF100F82DA5 /* GBP@2x.png in Resources */,
 				02FA8C2919D7ED280053342B /* LaunchScreen.xib in Resources */,
-				5A217E9519E599AD009FB91F /* HKD.png in Resources */,
-				5A217E9619E599AD009FB91F /* USD.png in Resources */,
-				5A217E9419E599AD009FB91F /* EUR.png in Resources */,
 				02FA8C2619D7ED280053342B /* Images.xcassets in Resources */,
+				5ACB50CC19ECADF100F82DA5 /* EUR@2x.png in Resources */,
+				5ACB50CA19ECADF100F82DA5 /* CAD@2x.png in Resources */,
+				5ACB50D519ECADF100F82DA5 /* USD@2x.png in Resources */,
+				5ACB50CE19ECADF100F82DA5 /* HKD@2x.png in Resources */,
+				5ACB50D319ECADF100F82DA5 /* MOP@2x.png in Resources */,
+				5ACB50D019ECADF100F82DA5 /* KRW@2x.png in Resources */,
+				5ACB50CF19ECADF100F82DA5 /* JPY@2x.png in Resources */,
+				5ACB50CB19ECADF100F82DA5 /* CNY@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,7 +331,7 @@
 				INFOPLIST_FILE = cocurrency/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "汇率换算";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -345,7 +345,7 @@
 				INFOPLIST_FILE = cocurrency/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "汇率换算";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

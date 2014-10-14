@@ -35,16 +35,20 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
 
 
 - (void) updateInfo {
-    NSURLSessionDataTask *dataTask=[self.session dataTaskWithURL:[NSURL URLWithString:yahoolURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSString *string =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"the data is %@",string);
-        NSLog(@"the data 's address is %@",data);
-        self.currency=[self getDicFromObject:data];
-        if (self.currency!=nil) [self.delegate updateUI];
+    dispatch_queue_t queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        NSURLSessionDataTask *dataTask=[self.session dataTaskWithURL:[NSURL URLWithString:yahoolURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSString *string =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"the data is %@",string);
+            NSLog(@"the data 's address is %@",data);
+            self.currency=[self getDicFromObject:data];
+            if (self.currency!=nil) [self.delegate updateUI];
             else [self.delegate updateUIError];
-
-    }];
-    [dataTask resume];
+            
+        }];
+        [dataTask resume];
+        
+    });   
     
 }
 

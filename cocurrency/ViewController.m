@@ -53,7 +53,7 @@
 }
 
 -(void)initMainFrameUI{
-    self.MainUITitle.title=@"常见汇率换算";
+    self.MainUITitle.title=@"常用汇率换算";
     
     self.tableview.allowsSelection=false;
     
@@ -119,7 +119,7 @@
     UICustomCell *cell=[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     NSString *currencyName=[self.currencyShown objectAtIndex:indexPath.row];
     NSLog(@"the currency name is %@, the row is %ld",currencyName,indexPath.row);
-    cell.currencyImage.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@.png",currencyName]];
+    cell.currencyImage.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@@2x.png",currencyName]];
     cell.currencyName.text=currencyName;
     cell.currencyFullName.text=[self.currencyFullName getFullCurrencyNameWith:currencyName];
     float currencyNumber=[(NSNumber*)self.NumberShown[indexPath.row] floatValue];
