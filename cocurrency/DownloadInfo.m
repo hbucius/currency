@@ -7,12 +7,14 @@
 //
 
 #import "DownloadInfo.h"
-
+#import <CoreData/CoreData.h>
+#import "Context.h"
+#import "CurrencyRate+Update.h"
 NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrencies/quote?format=json&";
 
 @interface DownloadInfo ()
 - (NSDictionary *) getDicFromObject :(NSData *) data;
-
+-(NSDictionary *) getCurrencyRateFromCoreData;
 @property(strong,nonatomic) NSDictionary *currency;
 
 
@@ -28,10 +30,25 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
     if(self) {
         _session=[NSURLSession sharedSession];
         _delegate=delegate;
+        _currency=[self getCurrencyRateFromCoreData];
      }
     return self;
 }
 
+-(NSDictionary *) getCurrencyRateFromCoreData{
+    
+    NSEntityDescription *entity=[NSEntityDescription entityForName:@"CurrencyRate" inManagedObjectContext:[Context context]];
+    NSFetchRequest *request=[[NSFetchRequest alloc]init];
+    [request setEntity:entity];
+    NSError *error;
+    NSArray *array=[[Context context]executeFetchRequest:request error:&error];
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    for (CurrencyRate *rate  in array  ){
+        [dic setValue:rate.rate forKey:rate.shortname];
+    }
+    return dic;
+    
+}
 
 
 - (void) updateInfo {

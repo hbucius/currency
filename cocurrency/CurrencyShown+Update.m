@@ -7,7 +7,23 @@
 //
 
 #import "CurrencyShown+Update.h"
+#import "Context.h"
 
 @implementation CurrencyShown (Update)
+
+
++(void) updateCurrencyShown:(NSArray*) array{
+    
+}
++(NSArray *) getCurrencyShown{
+    
+    NSEntityDescription *entity=[NSEntityDescription entityForName:@"CurrencyShown" inManagedObjectContext:[Context context]];
+    NSFetchRequest *request=[[NSFetchRequest alloc]init];
+    [request setEntity:entity];
+    NSError *error;
+    NSArray *array=[[Context context] executeFetchRequest:request error:&error];
+    return array;    
+    
+}
 
 @end

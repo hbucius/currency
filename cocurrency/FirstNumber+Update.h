@@ -7,7 +7,12 @@
 //
 
 #import "FirstNumber.h"
-
+#import "Context.h"
 @interface FirstNumber (Update)
+
+
++(void) updateFirstNumber:(NSDictionary*) dictionary;
++(NSUInteger *) getFirstNumber;
+
 
 @end

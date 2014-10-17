@@ -1,5 +1,5 @@
 //
-//  FirstNumber.h
+//  Context.h
 //  cocurrency
 //
 //  Created by hbucius on 10/15/14.
@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "AppDelegate.h"
+@interface Context : NSObject
 
-
-@interface FirstNumber : NSManagedObject
-
-@property (nonatomic, retain) NSNumber * number;
-
++(NSManagedObjectContext *) context ;
++(AppDelegate*) delegate ;
 
 @end

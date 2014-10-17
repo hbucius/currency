@@ -6,6 +6,7 @@
         <attribute name="shortname" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="CurrencyShown" representedClassName="CurrencyShown" syncable="YES">
+        <attribute name="fullname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="shortname" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -14,7 +15,7 @@
     </entity>
     <elements>
         <element name="CurrencyRate" positionX="-54" positionY="-9" width="128" height="90"/>
-        <element name="CurrencyShown" positionX="-45" positionY="27" width="128" height="73"/>
+        <element name="CurrencyShown" positionX="-45" positionY="27" width="128" height="90"/>
         <element name="FirstNumber" positionX="-27" positionY="45" width="128" height="58"/>
     </elements>
 </model>

@@ -10,4 +10,7 @@
 
 @interface CurrencyShown (Update)
 
++(void) updateCurrencyShown:(NSArray*) array;
++(NSArray *) getCurrencyShown;
+
 @end

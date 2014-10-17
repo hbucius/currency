@@ -8,6 +8,7 @@
 
 #import "CurrencyRate+Update.h"
 #import "AppDelegate.h"
+#import "Context.h"
 @implementation CurrencyRate (Update)
 
 
@@ -19,27 +20,25 @@
         if([currencyName isKindOfClass:[NSString class]]){
             CurrencyRate *managedCurrency=[NSEntityDescription insertNewObjectForEntityForName:@"CurrencyRate" inManagedObjectContext:context];
             if(managedCurrency!=nil){
-                managedCurrency.name=currencyName;
+                managedCurrency.shortname=currencyName;
                 managedCurrency.rate=(NSNumber *)[dictionary objectForKey:currencyName];
-                [delegate saveContext];
+                [[Context delegate] saveContext];
             }
             
         }
     }
 }
 +(NSDictionary *) getRateFromCoreData{
-    AppDelegate * delegate=(AppDelegate*)[UIApplication sharedApplication].delegate;
-    NSManagedObjectContext *context= delegate.managedObjectContext;
-    NSEntityDescription *entityDescription=[NSEntityDescription entityForName:@"CurrencyRate" inManagedObjectContext:context];
+    NSEntityDescription *entityDescription=[NSEntityDescription entityForName:@"CurrencyRate" inManagedObjectContext:[Context context]];
     NSFetchRequest *fetchRequest=[[NSFetchRequest alloc]init];
     [fetchRequest setEntity:entityDescription];
     NSError *erro;
-    NSArray *array=[context executeFetchRequest:fetchRequest error:&erro];
+    NSArray *array=[[Context context] executeFetchRequest:fetchRequest error:&erro];
     CurrencyRate *currencyRate;
     NSLog(@"the currency number is %lu" ,(unsigned long)array.count);
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     for (currencyRate in array) {
-        [dic setObject:currencyRate.rate forKey:currencyRate.name];
+        [dic setObject:currencyRate.rate forKey:currencyRate.shortname];
     }
     return dic;
 }
