@@ -11,6 +11,7 @@
 @protocol UIUpdateFromSession <NSObject>
 
 -(void) updateUI ;
+-(void) updateUIOK ;
 
 -(void) updateUIError;
 

@@ -18,7 +18,7 @@
  
     
 }
-+(NSUInteger *) getFirstNumber{
++(NSNumber *) getFirstNumber{
     
     NSEntityDescription *entityDescription=[NSEntityDescription entityForName:@"FirstNumber" inManagedObjectContext:[Context context]];
     NSFetchRequest *fetchRequest=[[NSFetchRequest alloc]init];
@@ -26,9 +26,9 @@
     NSError *erro;
     NSArray *array=[[Context context] executeFetchRequest:fetchRequest error:&erro];
     NSLog(@"the array count  is %lu in first number table" ,(unsigned long)array.count);
-    if([array[0] isKindOfClass:[FirstNumber class]])
-        return [((FirstNumber*)array[0]).number integerValue];
-    else return 1001;
+    if(array.count!=0 && [array[0] isKindOfClass:[FirstNumber class]])
+        return ((FirstNumber*)array[0]).number ;
+    return [NSNumber numberWithInt:1000];
 }
 
 

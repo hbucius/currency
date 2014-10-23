@@ -14,9 +14,9 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
 
 @interface DownloadInfo ()
 - (NSDictionary *) getDicFromObject :(NSData *) data;
--(NSDictionary *) getCurrencyRateFromCoreData;
+-(void) setCurrencyRateFromCoreData;
 @property(strong,nonatomic) NSDictionary *currency;
-
+@property(strong,nonatomic) NSDictionary *currencyName;
 
 @end
 
@@ -30,37 +30,46 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
     if(self) {
         _session=[NSURLSession sharedSession];
         _delegate=delegate;
-        _currency=[self getCurrencyRateFromCoreData];
+        [self setCurrencyRateFromCoreData];
      }
     return self;
 }
 
--(NSDictionary *) getCurrencyRateFromCoreData{
+-(void) setCurrencyRateFromCoreData{
     
     NSEntityDescription *entity=[NSEntityDescription entityForName:@"CurrencyRate" inManagedObjectContext:[Context context]];
     NSFetchRequest *request=[[NSFetchRequest alloc]init];
     [request setEntity:entity];
     NSError *error;
     NSArray *array=[[Context context]executeFetchRequest:request error:&error];
-    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    _currency=[[NSMutableDictionary alloc]init];
+    _currencyName=[[NSMutableDictionary alloc]init];
     for (CurrencyRate *rate  in array  ){
-        [dic setValue:rate.rate forKey:rate.shortname];
+        [_currency setValue:rate.rate forKey:rate.shortname];
+        [_currencyName setValue:rate.fullname forKey:rate.shortname];
     }
-    return dic;
+    [self.delegate updateUI];
     
 }
 
 
 - (void) updateInfo {
-    dispatch_queue_t queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_queue_t queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
     dispatch_async(queue, ^{
         NSURLSessionDataTask *dataTask=[self.session dataTaskWithURL:[NSURL URLWithString:yahoolURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             NSString *string =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
             NSLog(@"the data is %@",string);
-            NSLog(@"the data 's address is %@",data);
-            self.currency=[self getDicFromObject:data];
-            if (self.currency!=nil) [self.delegate updateUI];
-            else [self.delegate updateUIError];
+            NSDictionary *dic=[self getDicFromObject:data];
+            if (dic!=nil && dic.count>0)
+            {
+                self.currency=dic;
+                [self.delegate updateUI];
+                [self.delegate updateUIOK];
+                [CurrencyRate updateCoreData:self.currency];
+            }
+            else {
+                [self.delegate updateUIError];
+            }
             
         }];
         [dataTask resume];
@@ -125,4 +134,10 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
 }
 
 
+
+-(NSString *) getFullCurrencyNameWith:(NSString*) currencyName{
+    
+    return [self.currencyName valueForKey:currencyName];
+    
+}
 @end

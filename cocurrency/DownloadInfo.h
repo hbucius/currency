@@ -17,4 +17,6 @@
 -(instancetype) initWithDelegate:(id) delegate;
 -(void) updateInfo ;
 -(float) exchangeToCurrency:(NSString*) newCurrencyName withNumber:(float) number oldCurrency:(NSString*) oldCurrencyName;
+-(NSString *) getFullCurrencyNameWith:(NSString*) currencyName;
+
 @end

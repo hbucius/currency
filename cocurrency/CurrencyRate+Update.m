@@ -16,15 +16,27 @@
     id currencyName;
     AppDelegate * delegate=(AppDelegate*)[UIApplication sharedApplication].delegate;
     NSManagedObjectContext *context= delegate.managedObjectContext;
+    NSEntityDescription *entity=[NSEntityDescription entityForName:@"CurrencyRate" inManagedObjectContext:[Context context]];
+    NSFetchRequest *request=[[NSFetchRequest alloc]init];
+    [request setEntity:entity];
     for (currencyName in [dictionary allKeys]) {
         if([currencyName isKindOfClass:[NSString class]]){
-            CurrencyRate *managedCurrency=[NSEntityDescription insertNewObjectForEntityForName:@"CurrencyRate" inManagedObjectContext:context];
-            if(managedCurrency!=nil){
-                managedCurrency.shortname=currencyName;
-                managedCurrency.rate=(NSNumber *)[dictionary objectForKey:currencyName];
-                [[Context delegate] saveContext];
+            NSPredicate *predict=[NSPredicate predicateWithFormat:@"shortname=%@",currencyName];
+            [request setPredicate:predict];
+            NSError *error;
+            NSArray *array=[[Context context]executeFetchRequest:request error:&error];
+            if (array.count>=1) {
+                CurrencyRate *currencyRate=array[0];
+                currencyRate.rate=[dictionary valueForKey:currencyName];
             }
-            
+            else{
+                CurrencyRate *managedCurrency=[NSEntityDescription insertNewObjectForEntityForName:@"CurrencyRate" inManagedObjectContext:context];
+                if(managedCurrency!=nil){
+                    managedCurrency.shortname=currencyName;
+                    managedCurrency.rate=(NSNumber *)[dictionary objectForKey:currencyName];
+                    [[Context delegate] saveContext];
+                }
+            }
         }
     }
 }

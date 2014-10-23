@@ -9,8 +9,7 @@
 #import "ViewController.h"
 #import "DownloadInfo.h"
 #import "UICustomCell.h"
-#import "CurrencyName.h"
-
+#import "FirstNumber+Update.h"
 @interface ViewController  ()
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UIButton *AddCurrency;
@@ -18,7 +17,6 @@
 @property (strong,nonatomic) NSMutableArray   * currencyShown;
 @property (strong,nonatomic) NSMutableArray   * NumberShown;
 @property (strong,nonatomic) DownloadInfo * info;
-@property (strong,nonatomic) CurrencyName * currencyFullName;
 @property (strong,nonatomic)  UITextField * firstResponder;
 @property (weak, nonatomic) IBOutlet UINavigationItem *MainUITitle;
 @property( assign,nonatomic) BOOL keyBoardShown;
@@ -29,15 +27,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    [self initCurrencyInfo];
-    [self initMainFrameUI];
-    [self initCurrencyFullName];
     [self initCurrencyShow];
     [self initNumberShow];
+    [self initCurrencyInfo];
+    [self initMainFrameUI];
     [self setDelegateAndSource];
-    [self.info updateInfo];
     [self setupForDismissKeyboard];
+
  }
+
+-(void) viewDidAppear:(BOOL)animated{
+    [self.info updateInfo];
+
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -66,21 +68,18 @@
 }
 - (void) initNumberShow{
     _NumberShown=[[NSMutableArray alloc]init];
-    for (int i=0; i<_currencyShown.count; i++) {
+    [_NumberShown addObject:[FirstNumber getFirstNumber]];
+    for (int i=0; i<_currencyShown.count-1; i++) {
         [_NumberShown addObject:[NSNumber numberWithFloat:0]];
     }
    
-    NSLog(@"initNumberShown finished") ;
+    NSLog(_NumberShown.description) ;
 }
 
 -(void) initCurrencyInfo{
     _info=[[DownloadInfo alloc]initWithDelegate:self];
 }
 
--(void) initCurrencyFullName{
-    _currencyFullName=[[CurrencyName alloc]init];
-    
-}
 
 -(void) setupForDismissKeyboard{
     UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
@@ -98,8 +97,8 @@
 
 -(void) updateUI {
     NSLog(@"UI is updated");
-    int row_remain_unchanged=0;
-    int row_number_remain_unchanged=1000;
+    NSInteger row_remain_unchanged=0;
+    NSInteger row_number_remain_unchanged=[self.NumberShown[0] integerValue];
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.firstResponder) return;
         [_NumberShown replaceObjectAtIndex:row_remain_unchanged withObject:[NSNumber numberWithFloat:row_number_remain_unchanged]];
@@ -114,7 +113,24 @@
 -(void) updateUIError{
     
     NSLog(@"UI Error is updated");
+    dispatch_async(dispatch_get_main_queue(),^
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"更新错误，将使用上次更新的汇率" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    });
+ }
+
+-(void) updateUIOK{
+    NSLog(@"updateUI OK");
+    dispatch_async(dispatch_get_main_queue(),^
+                   {
+                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"汇率更新成功" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                       [alert show];
+                   });
+
+
 }
+
 
 
 #pragma mark table view data source
@@ -126,7 +142,7 @@
     NSLog(@"the currency name is %@, the row is %ld",currencyName,indexPath.row);
     cell.currencyImage.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@@2x.png",currencyName]];
     cell.currencyName.text=currencyName;
-    cell.currencyFullName.text=[self.currencyFullName getFullCurrencyNameWith:currencyName];
+    cell.currencyFullName.text=[self.info getFullCurrencyNameWith:currencyName];
     float currencyNumber=[(NSNumber*)self.NumberShown[indexPath.row] floatValue];
     [self updateCell:cell inputText:currencyNumber];
     return cell;

@@ -12,7 +12,7 @@
 
 
 +(void) updateFirstNumber:(NSDictionary*) dictionary;
-+(NSUInteger *) getFirstNumber;
++(NSNumber *) getFirstNumber;
 
 
 @end
