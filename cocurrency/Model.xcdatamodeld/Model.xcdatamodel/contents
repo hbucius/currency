@@ -12,9 +12,13 @@
     <entity name="FirstNumber" representedClassName="FirstNumber" syncable="YES">
         <attribute name="number" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
     </entity>
+    <entity name="UpdateTime" syncable="YES">
+        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
     <elements>
         <element name="CurrencyRate" positionX="-54" positionY="-9" width="128" height="90"/>
         <element name="CurrencyShown" positionX="-45" positionY="27" width="128" height="73"/>
         <element name="FirstNumber" positionX="-27" positionY="45" width="128" height="60"/>
+        <element name="UpdateTime" positionX="-27" positionY="36" width="128" height="58"/>
     </elements>
 </model>

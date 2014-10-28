@@ -42,6 +42,7 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
         for (CurrencyRate *rate  in array  ){
             [_currency setValue:rate.rate forKey:rate.shortname];
             [_currencyName setValue:rate.fullname forKey:rate.shortname];
+            NSLog(@"full name is %@",rate.fullname);
         }
 
     }
@@ -133,8 +134,8 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
 
 
 -(NSString *) getFullCurrencyNameWith:(NSString*) currencyName{
-    
-    return [self.currencyName valueForKey:currencyName];
+    NSString *currencyFullName=[NSString stringWithFormat:@"USD/%@",currencyName];
+    return [self.currencyName valueForKey:currencyFullName];
     
 }
 @end
