@@ -11,7 +11,9 @@
 #import "AppDelegate.h"
 @interface Context : NSObject
 
-+(NSManagedObjectContext *) context ;
-+(AppDelegate*) delegate ;
++(Context*) SharedInstance;
+-(NSManagedObjectContext *) context ;
+-(dispatch_queue_t) getCocurrentQueue;
+- (void)saveContext ;
 
 @end

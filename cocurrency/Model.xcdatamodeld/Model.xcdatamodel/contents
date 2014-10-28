@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="14A389" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14A389" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="CurrencyRate" representedClassName="CurrencyRate" syncable="YES">
         <attribute name="fullname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rate" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -10,11 +10,11 @@
         <attribute name="shortname" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="FirstNumber" representedClassName="FirstNumber" syncable="YES">
-        <attribute name="number" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
         <element name="CurrencyRate" positionX="-54" positionY="-9" width="128" height="90"/>
         <element name="CurrencyShown" positionX="-45" positionY="27" width="128" height="73"/>
-        <element name="FirstNumber" positionX="-27" positionY="45" width="128" height="58"/>
+        <element name="FirstNumber" positionX="-27" positionY="45" width="128" height="60"/>
     </elements>
 </model>

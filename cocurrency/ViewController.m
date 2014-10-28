@@ -28,7 +28,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     [self initCurrencyShow];
-    [self initNumberShow];
     [self initCurrencyInfo];
     [self initMainFrameUI];
     [self setDelegateAndSource];
@@ -66,14 +65,20 @@
     //_currencyShown=[[NSMutableArray alloc]initWithObjects:@"CNY",@"USD",@"EUR",@"HKD",nil];
  
 }
-- (void) initNumberShow{
-    _NumberShown=[[NSMutableArray alloc]init];
-    [_NumberShown addObject:[FirstNumber getFirstNumber]];
-    for (int i=0; i<_currencyShown.count-1; i++) {
-        [_NumberShown addObject:[NSNumber numberWithFloat:0]];
+- (NSMutableArray *)  NumberShown  {
+    if(_NumberShown==nil){
+        _NumberShown=[[NSMutableArray alloc]init];
+        NSNumber *firstNumber=[FirstNumber getFirstNumber];
+        [_NumberShown addObject:firstNumber];
+        float value=[firstNumber floatValue];
+        NSString *firstName=self.currencyShown[0];
+        for (int i=1; i<self.currencyShown.count; i++) {
+            float newCurrencyValue=[self.info exchangeToCurrency:self.currencyShown[i] withNumber:value oldCurrency:firstName];
+            [_NumberShown addObject:[NSNumber numberWithFloat:newCurrencyValue]];
+        }
     }
-   
-    NSLog(_NumberShown.description) ;
+    return _NumberShown;
+    
 }
 
 -(void) initCurrencyInfo{
@@ -97,8 +102,9 @@
 
 -(void) updateUI {
     NSLog(@"UI is updated");
+    /**
     NSInteger row_remain_unchanged=0;
-    NSInteger row_number_remain_unchanged=[self.NumberShown[0] integerValue];
+    float row_number_remain_unchanged=[self.NumberShown[0] floatValue];
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.firstResponder) return;
         [_NumberShown replaceObjectAtIndex:row_remain_unchanged withObject:[NSNumber numberWithFloat:row_number_remain_unchanged]];
@@ -108,6 +114,9 @@
         [self refreshTableView];
         
     });
+     **/
+    NSIndexPath *indexpath=[NSIndexPath indexPathForRow:0 inSection:0];
+    [self updateCellWithIndexPath:indexpath];
    
 }
 -(void) updateUIError{
@@ -232,6 +241,9 @@
         float currencyNumber=[self.info exchangeToCurrency:newCurrencyName withNumber:oldCurrencyNumbr oldCurrency:oldCurrencyName];
         [self.NumberShown replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:currencyNumber]];
         UICustomCell *cell_new=(UICustomCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        if (cell_new==nil) {
+            NSLog(@"cell new is nil");
+        }
         [self updateCell:cell_new inputText:currencyNumber];
         NSLog(@"cell is updated to %f",currencyNumber);
     }
@@ -262,4 +274,10 @@
     
 }
 
+- (void) saveFirstNumber{
+    NSLog(@"save First Number is called");
+    if(self.NumberShown.count>=1){
+        [FirstNumber updateFirstNumber:self.NumberShown[0]];
+    }
+}
 @end

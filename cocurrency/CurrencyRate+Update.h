@@ -10,6 +10,6 @@
 
 @interface CurrencyRate (Update)
 +(void) updateCoreData:(NSDictionary*) dictionary;
-+(NSDictionary *) getRateFromCoreData;
++(NSArray *) getRateFromCoreData;
 
 @end

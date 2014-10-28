@@ -11,6 +11,7 @@
 
 @interface ViewController : UITableViewController <UIUpdateFromSession,UITableViewDataSource,UITableViewDelegate>
 
+- (void) saveFirstNumber;
 
 
 @end

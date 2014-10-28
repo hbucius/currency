@@ -15,8 +15,7 @@
 		02FA8C2919D7ED280053342B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02FA8C2719D7ED280053342B /* LaunchScreen.xib */; };
 		02FA8C4019D80F8F0053342B /* DownloadInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA8C3F19D80F8F0053342B /* DownloadInfo.m */; };
 		5A09012919E448CC007653C2 /* UICustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A09012819E448CC007653C2 /* UICustomCell.m */; };
-		5A217E9C19E5A302009FB91F /* CurrencyName.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A217E9B19E5A302009FB91F /* CurrencyName.m */; };
-		5A534E1319F7FADF00A6EE9D /* makePreData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 5A534E1219F7FADF00A6EE9D /* makePreData.sqlite */; };
+		5A534E1719F8A04300A6EE9D /* makePreData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 5A534E1619F8A04300A6EE9D /* makePreData.sqlite */; };
 		5ACB50CA19ECADF100F82DA5 /* CAD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB50BE19ECADF100F82DA5 /* CAD@2x.png */; };
 		5ACB50CB19ECADF100F82DA5 /* CNY@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB50BF19ECADF100F82DA5 /* CNY@2x.png */; };
 		5ACB50CC19ECADF100F82DA5 /* EUR@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB50C019ECADF100F82DA5 /* EUR@2x.png */; };
@@ -54,9 +53,7 @@
 		02FA8C4119D8FD770053342B /* UIUpdateFromSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIUpdateFromSession.h; sourceTree = "<group>"; };
 		5A09012719E448CC007653C2 /* UICustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICustomCell.h; path = cocurrency/UICustomCell.h; sourceTree = "<group>"; };
 		5A09012819E448CC007653C2 /* UICustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICustomCell.m; path = cocurrency/UICustomCell.m; sourceTree = "<group>"; };
-		5A217E9A19E5A302009FB91F /* CurrencyName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrencyName.h; path = cocurrency/CurrencyName.h; sourceTree = "<group>"; };
-		5A217E9B19E5A302009FB91F /* CurrencyName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrencyName.m; path = cocurrency/CurrencyName.m; sourceTree = "<group>"; };
-		5A534E1219F7FADF00A6EE9D /* makePreData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = makePreData.sqlite; path = cocurrency/makePreData.sqlite; sourceTree = "<group>"; };
+		5A534E1619F8A04300A6EE9D /* makePreData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = makePreData.sqlite; path = cocurrency/Documents/makePreData.sqlite; sourceTree = "<group>"; };
 		5ACB50BE19ECADF100F82DA5 /* CAD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CAD@2x.png"; sourceTree = "<group>"; };
 		5ACB50BF19ECADF100F82DA5 /* CNY@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CNY@2x.png"; sourceTree = "<group>"; };
 		5ACB50C019ECADF100F82DA5 /* EUR@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EUR@2x.png"; sourceTree = "<group>"; };
@@ -100,7 +97,7 @@
 		02FA8C0C19D7ED280053342B = {
 			isa = PBXGroup;
 			children = (
-				5A534E1219F7FADF00A6EE9D /* makePreData.sqlite */,
+				5A534E1619F8A04300A6EE9D /* makePreData.sqlite */,
 				5AEDCE0219EEBC190030AA76 /* CoreData.framework */,
 				02FA8C1819D7ED280053342B /* Supporting Files */,
 				5ACB50E819EEADFD00F82DA5 /* controllers */,
@@ -158,8 +155,6 @@
 				5ACB50FB19EEB4AF00F82DA5 /* Model.xcdatamodeld */,
 				5ACB50F819EEB49500F82DA5 /* FirstNumber+Update.h */,
 				5ACB50F919EEB49500F82DA5 /* FirstNumber+Update.m */,
-				5A217E9A19E5A302009FB91F /* CurrencyName.h */,
-				5A217E9B19E5A302009FB91F /* CurrencyName.m */,
 				5ACB50EF19EEB1FE00F82DA5 /* FirstNumber.h */,
 				5ACB50F019EEB1FE00F82DA5 /* FirstNumber.m */,
 				5ACB50EC19EEB1FE00F82DA5 /* CurrencyRate.h */,
@@ -258,7 +253,7 @@
 				5ACB50D419ECADF100F82DA5 /* TWD@2x.png in Resources */,
 				02FA8C2419D7ED280053342B /* Main.storyboard in Resources */,
 				5ACB50CD19ECADF100F82DA5 /* GBP@2x.png in Resources */,
-				5A534E1319F7FADF00A6EE9D /* makePreData.sqlite in Resources */,
+				5A534E1719F8A04300A6EE9D /* makePreData.sqlite in Resources */,
 				02FA8C2919D7ED280053342B /* LaunchScreen.xib in Resources */,
 				02FA8C2619D7ED280053342B /* Images.xcassets in Resources */,
 				5ACB50CC19ECADF100F82DA5 /* EUR@2x.png in Resources */,
@@ -284,7 +279,6 @@
 				5ACB50E419EEADEA00F82DA5 /* CurrencyRate+Update.m in Sources */,
 				5ACB50FD19EEB4AF00F82DA5 /* Model.xcdatamodeld in Sources */,
 				02FA8C2119D7ED280053342B /* ViewController.m in Sources */,
-				5A217E9C19E5A302009FB91F /* CurrencyName.m in Sources */,
 				5A09012919E448CC007653C2 /* UICustomCell.m in Sources */,
 				5ACB50EB19EEB1FD00F82DA5 /* CurrencyShown.m in Sources */,
 				5ACB50EE19EEB1FE00F82DA5 /* CurrencyRate.m in Sources */,

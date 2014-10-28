@@ -14,7 +14,6 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
 
 @interface DownloadInfo ()
 - (NSDictionary *) getDicFromObject :(NSData *) data;
--(void) setCurrencyRateFromCoreData;
 @property(strong,nonatomic) NSDictionary *currency;
 @property(strong,nonatomic) NSDictionary *currencyName;
 
@@ -30,32 +29,30 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
     if(self) {
         _session=[NSURLSession sharedSession];
         _delegate=delegate;
-        [self setCurrencyRateFromCoreData];
+        [self currency];
      }
     return self;
 }
 
--(void) setCurrencyRateFromCoreData{
-    
-    NSEntityDescription *entity=[NSEntityDescription entityForName:@"CurrencyRate" inManagedObjectContext:[Context context]];
-    NSFetchRequest *request=[[NSFetchRequest alloc]init];
-    [request setEntity:entity];
-    NSError *error;
-    NSArray *array=[[Context context]executeFetchRequest:request error:&error];
-    _currency=[[NSMutableDictionary alloc]init];
-    _currencyName=[[NSMutableDictionary alloc]init];
-    for (CurrencyRate *rate  in array  ){
-        [_currency setValue:rate.rate forKey:rate.shortname];
-        [_currencyName setValue:rate.fullname forKey:rate.shortname];
+-(NSDictionary* ) currency{
+    if(_currency==nil){
+        NSArray *array=[CurrencyRate getRateFromCoreData];
+        _currency=[[NSMutableDictionary alloc]init];
+        _currencyName=[[NSMutableDictionary alloc]init];
+        for (CurrencyRate *rate  in array  ){
+            [_currency setValue:rate.rate forKey:rate.shortname];
+            [_currencyName setValue:rate.fullname forKey:rate.shortname];
+        }
+
     }
-    [self.delegate updateUI];
+    return _currency;
+    
     
 }
 
 
 - (void) updateInfo {
-    dispatch_queue_t queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
-    dispatch_async(queue, ^{
+    dispatch_async([[Context SharedInstance] getCocurrentQueue], ^{
         NSURLSessionDataTask *dataTask=[self.session dataTaskWithURL:[NSURL URLWithString:yahoolURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             NSString *string =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
             NSLog(@"the data is %@",string);

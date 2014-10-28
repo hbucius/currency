@@ -11,7 +11,7 @@
 @interface FirstNumber (Update)
 
 
-+(void) updateFirstNumber:(NSDictionary*) dictionary;
++(void) updateFirstNumber:(NSNumber*) number;
 +(NSNumber *) getFirstNumber;
 
 

@@ -8,7 +8,7 @@
 
 #import "currencyName.h"
 
-
+#import <CoreData/CoreData.h>
 
 @interface CurrencyName()
 
@@ -19,6 +19,7 @@
 
 @implementation CurrencyName
 
+/**
 - (instancetype) init{
     self=[super init];
     if (self) {
@@ -45,7 +46,22 @@
     
 }
 
+**/
 
+-(instancetype ) init{
+    NSEntityDescription *entity=[NSEntityDescription entityForName:@"CurrencyRate" inManagedObjectContext:[Context context]];
+    NSFetchRequest *request=[[NSFetchRequest alloc]init];
+    [request setEntity:entity];
+    NSError *error;
+    NSArray *array=[[Context context]executeFetchRequest:request error:&error];
+    NSMutableArray *array2=[[NSMutableArray alloc]init];
+    for (CurrencyRate *rate  in array  ){
+        [array2 addObject:rate.shortname];
+        [array2 addObject:rate.rate];
+    }
+    return array2;
+    
+}
 -(NSString *) getFullCurrencyNameWith:(NSString*) currencyName{
     return [self.cocurrencyName valueForKey:currencyName];
     
