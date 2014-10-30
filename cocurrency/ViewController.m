@@ -10,6 +10,8 @@
 #import "DownloadInfo.h"
 #import "UICustomCell.h"
 #import "FirstNumber+Update.h"
+#import "SVPullToRefresh.h"
+#import "UIScrollView+SVInfiniteScrolling.h"
 @interface ViewController  ()
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UIButton *AddCurrency;
@@ -32,11 +34,17 @@
     [self initMainFrameUI];
     [self setDelegateAndSource];
     [self setupForDismissKeyboard];
+    ViewController __weak * weakSelf=self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf refreshActionTriggerd];
+        
+    }];
 
  }
 
 -(void) viewDidAppear:(BOOL)animated{
-    [self.info updateInfo];
+    [self.tableView triggerPullToRefresh];
+
 
 }
 
@@ -55,8 +63,11 @@
 
 -(void)initMainFrameUI{
     self.MainUITitle.title=@"常用汇率换算";
-    
     self.tableview.allowsSelection=false;
+    self.tableView.backgroundColor=[UIColor whiteColor];
+    self.navigationController.view.backgroundColor=[UIColor whiteColor];
+    self.edgesForExtendedLayout = UIRectEdgeNone ;
+
     
 }
 
@@ -100,6 +111,11 @@
     
 }
 
+- (void) refreshActionTriggerd{
+    ViewController __weak * weakSelf=self;
+    [weakSelf.info updateInfo];
+}
+
 -(void) updateUI {
     NSLog(@"UI is updated");
     /**
@@ -122,21 +138,30 @@
 -(void) updateUIError{
     
     NSLog(@"UI Error is updated");
-    dispatch_async(dispatch_get_main_queue(),^
+    dispatch_after([self refreshDelayTime],dispatch_get_main_queue(),^
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"更新错误，将使用上次更新的汇率" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
+        [self.tableView.pullToRefreshView stopAnimating];
+
     });
+
  }
+
+-(dispatch_time_t) refreshDelayTime{
+    dispatch_time_t time=dispatch_time(DISPATCH_TIME_NOW, 0.5*NSEC_PER_SEC);
+    return  time;
+}
 
 -(void) updateUIOK{
     NSLog(@"updateUI OK");
-    dispatch_async(dispatch_get_main_queue(),^
+    dispatch_after([self refreshDelayTime],dispatch_get_main_queue(),^
                    {
                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"汇率更新成功" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                        [alert show];
-                   });
+                       [self.tableView.pullToRefreshView stopAnimating];
 
+                   });
 
 }
 
@@ -179,6 +204,7 @@
     else
         cellA.inputText.text=[NSString stringWithFormat:@"%.2f",currencyNumber];
 }
+
 
 
 
