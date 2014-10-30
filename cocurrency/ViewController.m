@@ -34,15 +34,12 @@
     [self initMainFrameUI];
     [self setDelegateAndSource];
     [self setupForDismissKeyboard];
-    ViewController __weak * weakSelf=self;
-    [self.tableView addPullToRefreshWithActionHandler:^{
-        [weakSelf refreshActionTriggerd];
-        
-    }];
-
+    [self addRefreshSupport];
  }
 
 -(void) viewDidAppear:(BOOL)animated{
+
+
     [self.tableView triggerPullToRefresh];
 
 
@@ -67,7 +64,6 @@
     self.tableView.backgroundColor=[UIColor whiteColor];
     self.navigationController.view.backgroundColor=[UIColor whiteColor];
     self.edgesForExtendedLayout = UIRectEdgeNone ;
-
     
 }
 
@@ -109,6 +105,17 @@
     }];
     
     
+}
+
+- (void)addRefreshSupport{
+    ViewController __weak * weakSelf=self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf refreshActionTriggerd];
+        
+    }];
+    [self.tableView.pullToRefreshView setTitle:@"加载中......" forState:SVPullToRefreshStateLoading];
+    [self.tableView.pullToRefreshView setTitle:@"下拉刷新" forState:SVPullToRefreshStateStopped];
+    [self.tableView.pullToRefreshView setTitle:@"释放更新" forState:SVPullToRefreshStateTriggered];
 }
 
 - (void) refreshActionTriggerd{
@@ -282,6 +289,7 @@
     [self updateOtherCellByRow:indexPath.row];
  
 }
+
 
 #pragma mark help functions
 
