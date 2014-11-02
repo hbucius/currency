@@ -12,6 +12,10 @@
 #import "FirstNumber+Update.h"
 #import "SVPullToRefresh.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
+#import "UIUpdateFromSession.h"
+#import <QuartzCore/QuartzCore.h>
+#import "UpdateTime+Update.h"
+
 @interface ViewController  ()
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UIButton *AddCurrency;
@@ -22,6 +26,7 @@
 @property (strong,nonatomic)  UITextField * firstResponder;
 @property (weak, nonatomic) IBOutlet UINavigationItem *MainUITitle;
 @property( assign,nonatomic) BOOL keyBoardShown;
+@property (assign,nonatomic) CGFloat height;
 @end
 
 @implementation ViewController
@@ -64,6 +69,7 @@
     self.tableView.backgroundColor=[UIColor whiteColor];
     self.navigationController.view.backgroundColor=[UIColor whiteColor];
     self.edgesForExtendedLayout = UIRectEdgeNone ;
+    _height=70;
     
 }
 
@@ -98,10 +104,13 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         [self.tableview addGestureRecognizer:tapRecognizer];
         self.keyBoardShown=YES;
+        self.tableView.showsPullToRefresh=NO;
     }];
     [[NSNotificationCenter defaultCenter]addObserverForName:UIKeyboardDidHideNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         [self.tableview removeGestureRecognizer:tapRecognizer];
         self.keyBoardShown=NO;
+        self.tableView.showsPullToRefresh=YES;
+
     }];
     
     
@@ -147,7 +156,8 @@
     NSLog(@"UI Error is updated");
     dispatch_after([self refreshDelayTime],dispatch_get_main_queue(),^
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"更新错误，将使用上次更新的汇率" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: [self UIErrorString] message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+       
         [alert show];
         [self.tableView.pullToRefreshView stopAnimating];
 
@@ -155,8 +165,48 @@
 
  }
 
+-(NSString *) UIErrorString{
+    NSMutableString *ret=[@"无法获取最新汇率，将使用" mutableCopy];
+    NSDate *lastDate=[UpdateTime lastUpdateTime];
+    NSDate *currentDate=[NSDate date];
+    NSDateFormatter *lastDateFormatter=[[NSDateFormatter alloc]init];
+    NSDateFormatter *currentDateFormatter=[[NSDateFormatter alloc]init];
+    [lastDateFormatter setDateFormat:@"yyyyMMddHHmm"];
+    [currentDateFormatter setDateFormat:@"yyyyMMddHHmm"];
+    [lastDateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
+    [currentDateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
+    NSString *lastUpdateTime=[lastDateFormatter stringFromDate:lastDate];
+    NSString *currentTime= [currentDateFormatter stringFromDate:currentDate];
+    if (![[lastUpdateTime substringToIndex:4] isEqualToString:[currentTime substringToIndex:4]]) {
+        if ([[lastUpdateTime  substringToIndex:4] intValue]==0) {
+            [ret appendString:@"上次"];
+        }
+        else [ret appendFormat:@"%d年%d月%d日",[[lastUpdateTime  substringToIndex:4] intValue],[[lastUpdateTime substringWithRange:NSMakeRange(4, 2)] intValue],[[lastUpdateTime substringWithRange:NSMakeRange(6, 2)] intValue]];
+    }
+    else {
+        if ([[lastUpdateTime substringToIndex:8] isEqualToString:[currentTime substringToIndex:8]]) {
+            int lastUpdateHour=[[lastUpdateTime substringWithRange:NSMakeRange(8, 2)] intValue];
+            int lastUpdateMin=[[lastUpdateTime substringWithRange:NSMakeRange(10, 2)] intValue];
+            [ret appendFormat:@"今天%d点%d分",lastUpdateHour,lastUpdateMin];
+        }
+        else{
+            int currentMonth= [[currentTime substringWithRange:NSMakeRange(4, 2)] intValue];
+            int lastUpdateMonth=[[lastUpdateTime substringWithRange:NSMakeRange(4, 2)] intValue];
+            int currentDay= [[currentTime substringWithRange:NSMakeRange(6, 2)] intValue];
+            int lastUpdateDay=[[lastUpdateTime substringWithRange:NSMakeRange(6, 2)] intValue];
+            if (currentMonth==lastUpdateMonth && currentDay-lastUpdateDay==1) [ret appendString:@"昨天"];
+                else [ret appendFormat:@"%d月%d日",lastUpdateMonth,lastUpdateDay];
+            
+        }
+    }
+    
+    [ret appendString:@"获取的汇率进行换算"];
+    return ret;
+    
+}
+
 -(dispatch_time_t) refreshDelayTime{
-    dispatch_time_t time=dispatch_time(DISPATCH_TIME_NOW, 0.5*NSEC_PER_SEC);
+    dispatch_time_t time=dispatch_time(DISPATCH_TIME_NOW, 0.1*NSEC_PER_SEC);
     return  time;
 }
 
@@ -164,15 +214,42 @@
     NSLog(@"updateUI OK");
     dispatch_after([self refreshDelayTime],dispatch_get_main_queue(),^
                    {
-                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"汇率更新成功" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                       [alert show];
                        [self.tableView.pullToRefreshView stopAnimating];
-
+                       [self alertViewShowsWithRect:[self updateSuccessedAlertViewRect] String:@"汇率更新成功" duration:2.5];
                    });
 
 }
 
 
+-(void) alertViewShowsWithRect:(CGRect)rect String:(NSString*)text duration:(NSTimeInterval)time{
+    UIView *alertView=[[UIView alloc]initWithFrame:rect];
+    alertView.backgroundColor=[UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:0.8];
+    alertView.layer.cornerRadius=5;
+    alertView.layer.masksToBounds=YES;
+    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
+    label.textAlignment=NSTextAlignmentCenter;
+    NSMutableAttributedString *attributedString=[[NSMutableAttributedString alloc]initWithString:text];
+    [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, attributedString.length)];
+    [attributedString addAttribute:NSFontAttributeName   value:[UIFont fontWithName:nil size:15] range:NSMakeRange(0, attributedString.length)];
+    label.attributedText=[attributedString copy];
+    [alertView addSubview:label];
+    [self.view addSubview:alertView];
+    [UIView transitionWithView:alertView duration:time options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        alertView.alpha=0;
+    } completion:^(BOOL finished){
+        [alertView removeFromSuperview];
+    }];
+}
+
+-(CGRect) updateSuccessedAlertViewRect{
+    CGSize  alertViewSize=CGSizeMake(100, 30);
+    CGSize  screenSize=[UIScreen mainScreen].bounds.size;
+    int num=(screenSize.height-self.navigationController.navigationBar.frame.size.height)/self.height;
+    CGFloat alertViewOrigineX=self.tableView.frame.size.width/2-alertViewSize.width/2;
+    CGFloat alertViewOrigineY=self.height*(num-1)-alertViewSize.height;
+    CGRect rect= CGRectMake(alertViewOrigineX, alertViewOrigineY, alertViewSize.width,alertViewSize.height);
+    return rect;
+}
 
 #pragma mark table view data source
 
@@ -182,7 +259,10 @@
     NSString *currencyName=[self.currencyShown objectAtIndex:indexPath.row];
     NSLog(@"the currency name is %@, the row is %ld",currencyName,indexPath.row);
     cell.currencyImage.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@@2x.png",currencyName]];
-    cell.currencyName.text=currencyName;
+    NSMutableAttributedString *currencyNameMutableString=[[NSMutableAttributedString alloc]initWithString:currencyName];
+    [currencyNameMutableString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0] range:NSMakeRange(0,currencyNameMutableString.length)];
+    cell.currencyName.attributedText=currencyNameMutableString;
+    
     cell.currencyFullName.text=[self.info getFullCurrencyNameWith:currencyName];
     float currencyNumber=[(NSNumber*)self.NumberShown[indexPath.row] floatValue];
     [self updateCell:cell inputText:currencyNumber];
@@ -199,7 +279,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 70.0;
+    return self.height;
 
 
 }

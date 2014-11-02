@@ -27,7 +27,7 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
 -(instancetype) initWithDelegate:(id)delegate {
     self=[super init];
     if(self) {
-        _session=[NSURLSession sharedSession];
+        _session=[NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
         _delegate=delegate;
         [self currency];
      }
@@ -68,6 +68,7 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
             else {
                 [self.delegate updateUIError];
             }
+            data=nil;
             
         }];
         [dataTask resume];

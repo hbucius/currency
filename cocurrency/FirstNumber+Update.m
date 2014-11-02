@@ -8,10 +8,10 @@
 
 #import "FirstNumber+Update.h"
 #import "Context.h"
+#import "FirstNumber.h"
+
+
 @implementation FirstNumber (Update)
-
-
-
 
 +(void) updateFirstNumber:(NSNumber *) number{
     NSManagedObjectContext *context=[[Context SharedInstance] context];

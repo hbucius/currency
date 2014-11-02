@@ -9,6 +9,8 @@
 #import "CurrencyRate+Update.h"
 #import "AppDelegate.h"
 #import "Context.h"
+#import "UpdateTime+Update.h"
+
 @implementation CurrencyRate (Update)
 
 
@@ -48,6 +50,7 @@
             }
         }
         [[Context SharedInstance] saveContext];
+        [UpdateTime saveUpdateTime];
     });
 }
 +(NSArray *) getRateFromCoreData{

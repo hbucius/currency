@@ -7,6 +7,9 @@
 //
 
 #import "Context.h"
+#import <CoreData/CoreData.h>
+#import "AppDelegate.h"
+
 
 @interface Context ()
 
