@@ -12,7 +12,7 @@
 @interface DownloadInfo : NSObject
 
 @property(strong,nonatomic) NSURLSession * session;
-@property (strong,nonatomic) id <UIUpdateFromSession> delegate ;
+@property (weak,nonatomic) id <UIUpdateFromSession> delegate ;
 
 -(instancetype) initWithDelegate:(id) delegate;
 -(void) updateInfo ;

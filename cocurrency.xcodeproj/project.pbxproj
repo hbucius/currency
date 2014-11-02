@@ -16,6 +16,11 @@
 		02FA8C4019D80F8F0053342B /* DownloadInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA8C3F19D80F8F0053342B /* DownloadInfo.m */; };
 		5A09012919E448CC007653C2 /* UICustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A09012819E448CC007653C2 /* UICustomCell.m */; };
 		5A534E1719F8A04300A6EE9D /* makePreData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 5A534E1619F8A04300A6EE9D /* makePreData.sqlite */; };
+		5A6EE8FD1A0135040063E7FD /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6EE8FA1A0135040063E7FD /* UIScrollView+SVInfiniteScrolling.m */; };
+		5A6EE8FE1A0135040063E7FD /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6EE8FC1A0135040063E7FD /* UIScrollView+SVPullToRefresh.m */; };
+		5A6EE9001A0136860063E7FD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6EE8FF1A0136860063E7FD /* QuartzCore.framework */; };
+		5A6EE97C1A0650C40063E7FD /* UpdateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6EE97B1A0650C40063E7FD /* UpdateTime.m */; };
+		5A6EE9821A0651F50063E7FD /* UpdateTime+Update.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6EE9811A0651F50063E7FD /* UpdateTime+Update.m */; };
 		5ACB50CA19ECADF100F82DA5 /* CAD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB50BE19ECADF100F82DA5 /* CAD@2x.png */; };
 		5ACB50CB19ECADF100F82DA5 /* CNY@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB50BF19ECADF100F82DA5 /* CNY@2x.png */; };
 		5ACB50CC19ECADF100F82DA5 /* EUR@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB50C019ECADF100F82DA5 /* EUR@2x.png */; };
@@ -54,6 +59,16 @@
 		5A09012719E448CC007653C2 /* UICustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICustomCell.h; path = cocurrency/UICustomCell.h; sourceTree = "<group>"; };
 		5A09012819E448CC007653C2 /* UICustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICustomCell.m; path = cocurrency/UICustomCell.m; sourceTree = "<group>"; };
 		5A534E1619F8A04300A6EE9D /* makePreData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = makePreData.sqlite; path = cocurrency/Documents/makePreData.sqlite; sourceTree = "<group>"; };
+		5A6EE8F81A0135040063E7FD /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
+		5A6EE8F91A0135040063E7FD /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
+		5A6EE8FA1A0135040063E7FD /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
+		5A6EE8FB1A0135040063E7FD /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
+		5A6EE8FC1A0135040063E7FD /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
+		5A6EE8FF1A0136860063E7FD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5A6EE97A1A0650C40063E7FD /* UpdateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateTime.h; path = cocurrency/UpdateTime.h; sourceTree = "<group>"; };
+		5A6EE97B1A0650C40063E7FD /* UpdateTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpdateTime.m; path = cocurrency/UpdateTime.m; sourceTree = "<group>"; };
+		5A6EE9801A0651F50063E7FD /* UpdateTime+Update.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UpdateTime+Update.h"; path = "cocurrency/UpdateTime+Update.h"; sourceTree = "<group>"; };
+		5A6EE9811A0651F50063E7FD /* UpdateTime+Update.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UpdateTime+Update.m"; path = "cocurrency/UpdateTime+Update.m"; sourceTree = "<group>"; };
 		5ACB50BE19ECADF100F82DA5 /* CAD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CAD@2x.png"; sourceTree = "<group>"; };
 		5ACB50BF19ECADF100F82DA5 /* CNY@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CNY@2x.png"; sourceTree = "<group>"; };
 		5ACB50C019ECADF100F82DA5 /* EUR@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EUR@2x.png"; sourceTree = "<group>"; };
@@ -87,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A6EE9001A0136860063E7FD /* QuartzCore.framework in Frameworks */,
 				5AEDCE0319EEBC190030AA76 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,6 +113,8 @@
 		02FA8C0C19D7ED280053342B = {
 			isa = PBXGroup;
 			children = (
+				5A6EE8FF1A0136860063E7FD /* QuartzCore.framework */,
+				5A6EE8F71A0135040063E7FD /* SVPullToRefresh */,
 				5A534E1619F8A04300A6EE9D /* makePreData.sqlite */,
 				5AEDCE0219EEBC190030AA76 /* CoreData.framework */,
 				02FA8C1819D7ED280053342B /* Supporting Files */,
@@ -147,12 +165,28 @@
 			path = cocurrency/images;
 			sourceTree = "<group>";
 		};
+		5A6EE8F71A0135040063E7FD /* SVPullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				5A6EE8F81A0135040063E7FD /* SVPullToRefresh.h */,
+				5A6EE8F91A0135040063E7FD /* UIScrollView+SVInfiniteScrolling.h */,
+				5A6EE8FA1A0135040063E7FD /* UIScrollView+SVInfiniteScrolling.m */,
+				5A6EE8FB1A0135040063E7FD /* UIScrollView+SVPullToRefresh.h */,
+				5A6EE8FC1A0135040063E7FD /* UIScrollView+SVPullToRefresh.m */,
+			);
+			path = SVPullToRefresh;
+			sourceTree = "<group>";
+		};
 		5ACB50E619EEADF400F82DA5 /* model */ = {
 			isa = PBXGroup;
 			children = (
 				5AEDCDFF19EEB9230030AA76 /* Context.h */,
 				5AEDCE0019EEB9230030AA76 /* Context.m */,
 				5ACB50FB19EEB4AF00F82DA5 /* Model.xcdatamodeld */,
+				5A6EE97A1A0650C40063E7FD /* UpdateTime.h */,
+				5A6EE9801A0651F50063E7FD /* UpdateTime+Update.h */,
+				5A6EE9811A0651F50063E7FD /* UpdateTime+Update.m */,
+				5A6EE97B1A0650C40063E7FD /* UpdateTime.m */,
 				5ACB50F819EEB49500F82DA5 /* FirstNumber+Update.h */,
 				5ACB50F919EEB49500F82DA5 /* FirstNumber+Update.m */,
 				5ACB50EF19EEB1FE00F82DA5 /* FirstNumber.h */,
@@ -283,10 +317,14 @@
 				5ACB50EB19EEB1FD00F82DA5 /* CurrencyShown.m in Sources */,
 				5ACB50EE19EEB1FE00F82DA5 /* CurrencyRate.m in Sources */,
 				5ACB50FA19EEB49500F82DA5 /* FirstNumber+Update.m in Sources */,
+				5A6EE97C1A0650C40063E7FD /* UpdateTime.m in Sources */,
 				02FA8C4019D80F8F0053342B /* DownloadInfo.m in Sources */,
 				02FA8C1E19D7ED280053342B /* AppDelegate.m in Sources */,
 				02FA8C1B19D7ED280053342B /* main.m in Sources */,
+				5A6EE8FD1A0135040063E7FD /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				5AEDCE0119EEB9230030AA76 /* Context.m in Sources */,
+				5A6EE9821A0651F50063E7FD /* UpdateTime+Update.m in Sources */,
+				5A6EE8FE1A0135040063E7FD /* UIScrollView+SVPullToRefresh.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

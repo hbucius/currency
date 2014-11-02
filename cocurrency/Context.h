@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-#import "AppDelegate.h"
+
+@class NSManagedObjectContext;
 @interface Context : NSObject
 
 +(Context*) SharedInstance;

@@ -12,7 +12,7 @@
     <entity name="FirstNumber" representedClassName="FirstNumber" syncable="YES">
         <attribute name="number" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="UpdateTime" syncable="YES">
+    <entity name="UpdateTime" representedClassName="UpdateTime" syncable="YES">
         <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
