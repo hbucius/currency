@@ -15,6 +15,7 @@
 #import "UIUpdateFromSession.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UpdateTime+Update.h"
+#import "CurrencyShown+Update.h"
 
 @interface ViewController  ()
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -22,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *Refresh;
 @property (strong,nonatomic) NSMutableArray   * currencyShown;
 @property (strong,nonatomic) NSMutableArray   * NumberShown;
+@property (strong,nonatomic) NSMutableArray   * NumberShown_temp;
 @property (strong,nonatomic) DownloadInfo * info;
 @property (strong,nonatomic)  UITextField * firstResponder;
 @property (weak, nonatomic) IBOutlet UINavigationItem *MainUITitle;
@@ -70,13 +72,13 @@
     self.navigationController.view.backgroundColor=[UIColor whiteColor];
     self.edgesForExtendedLayout = UIRectEdgeNone ;
     _height=70;
+    self.navigationItem.rightBarButtonItem=self.editButtonItem;
     
 }
 
 - (void) initCurrencyShow{
-    _currencyShown=[[NSMutableArray alloc]initWithObjects:@"CNY",@"USD",@"EUR",@"HKD", @"JPY",@"KRW",@"GBP",@"TWD",@"MOP",@"CAD",nil];
-    //_currencyShown=[[NSMutableArray alloc]initWithObjects:@"CNY",@"USD",@"EUR",@"HKD",nil];
- 
+     //_currencyShown=[[NSMutableArray alloc]initWithObjects:@"CNY",@"USD",@"EUR",@"HKD", @"JPY",@"KRW",@"GBP",@"TWD",@"MOP",@"CAD",nil];
+    _currencyShown=[[CurrencyShown getCurrencyShown] mutableCopy];
 }
 - (NSMutableArray *)  NumberShown  {
     if(_NumberShown==nil){
@@ -116,6 +118,9 @@
     
 }
 
+
+
+
 - (void)addRefreshSupport{
     ViewController __weak * weakSelf=self;
     [self.tableView addPullToRefreshWithActionHandler:^{
@@ -134,19 +139,6 @@
 
 -(void) updateUI {
     NSLog(@"UI is updated");
-    /**
-    NSInteger row_remain_unchanged=0;
-    float row_number_remain_unchanged=[self.NumberShown[0] floatValue];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.firstResponder) return;
-        [_NumberShown replaceObjectAtIndex:row_remain_unchanged withObject:[NSNumber numberWithFloat:row_number_remain_unchanged]];
-        UICustomCell *cell=(UICustomCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row_remain_unchanged inSection:row_number_remain_unchanged]];
-        [self updateCell:cell inputText:row_number_remain_unchanged];
-        [self updateOtherCellByRow:row_remain_unchanged];
-        [self refreshTableView];
-        
-    });
-     **/
     NSIndexPath *indexpath=[NSIndexPath indexPathForRow:0 inSection:0];
     [self updateCellWithIndexPath:indexpath];
    
@@ -284,6 +276,8 @@
 
 }
 
+
+
 - (void) updateCell:(UICustomCell *) cellA inputText:(float)currencyNumber{
     NSLog(@"updateCell is called");
     if(fabs((float)(int)currencyNumber-currencyNumber)<pow(10, -10))
@@ -292,9 +286,84 @@
         cellA.inputText.text=[NSString stringWithFormat:@"%.2f",currencyNumber];
 }
 
+//delete ,move ,add
+
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
+    [self dismissKeyboard];
+    NSNumber *numberToMove=[self.NumberShown_temp objectAtIndex:sourceIndexPath.row];
+    [self.NumberShown_temp removeObjectAtIndex:sourceIndexPath.row];
+    [self.NumberShown_temp insertObject: numberToMove  atIndex:destinationIndexPath.row];
+    
+    NSString *currencyToMove=[self.currencyShown objectAtIndex:sourceIndexPath.row];
+    [self.currencyShown removeObjectAtIndex:sourceIndexPath.row];
+    [self.currencyShown insertObject: currencyToMove  atIndex:destinationIndexPath.row];
+    
+    return;
+}
+
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(self.currencyShown.count>2)
+        return UITableViewCellEditingStyleDelete;
+    else return  UITableViewCellEditingStyleNone;
+}
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+-(BOOL) tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    return YES;
+}
+
+-(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle==UITableViewCellEditingStyleDelete) {
+        [self.NumberShown_temp removeObjectAtIndex:indexPath.row];
+        [self.currencyShown removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+    }
+}
 
 
 
+#pragma mark Edit
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    NSLog(@"set editing is called");
+    [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:YES];
+    [self dismissKeyboard];
+    if (editing) {
+        //save and clear;
+        [self clearAndSaveNumberStatus];
+        
+    }
+    else {
+        [self restoreStatus];
+        [self saveCurrencyShown];
+        [self saveFirstNumber];
+        
+    }
+}
+
+-(void) clearAndSaveNumberStatus{
+    self.NumberShown_temp=[self.NumberShown mutableCopy];
+    if(self.NumberShown_temp.count>0){
+        [self.NumberShown replaceObjectAtIndex:0 withObject:[NSNumber numberWithFloat:0]];
+        NSIndexPath *path=[NSIndexPath indexPathForRow:0 inSection:0];
+        UICustomCell *cell=(UICustomCell*)[self.tableView cellForRowAtIndexPath:path];
+        [self updateCell:cell inputText:0];
+        [self updateCellWithIndexPath:0];
+        
+    }
+   
+}
+
+-(void) restoreStatus{
+    self.NumberShown=[self.NumberShown_temp mutableCopy];
+    [self refreshTableView];
+    
+}
 /**
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -362,6 +431,7 @@
     }
 }
 
+//get the first number from the UI ,then it update all the data source and UI according that
 -  (void) updateCellWithIndexPath:(NSIndexPath*)indexPath{
     UICustomCell *cell_old=(UICustomCell*)[self.tableview cellForRowAtIndexPath:indexPath];
     float oldCurrencyNumbr=[cell_old.inputText.text floatValue];
@@ -392,6 +462,13 @@
     NSLog(@"save First Number is called");
     if(self.NumberShown.count>=1){
         [FirstNumber updateFirstNumber:self.NumberShown[0]];
+    }
+}
+
+- (void) saveCurrencyShown{
+    NSLog(@"save Currency Shown is called");
+    if(self.currencyShown.count>=1){
+        [CurrencyShown updateCurrencyShown:self.currencyShown];
     }
 }
 @end
