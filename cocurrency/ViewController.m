@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UINavigationItem *MainUITitle;
 @property( assign,nonatomic) BOOL keyBoardShown;
 @property (assign,nonatomic) CGFloat height;
+@property (assign,nonatomic) BOOL deleteOnRow;
 @end
 
 @implementation ViewController
@@ -45,11 +46,8 @@
  }
 
 -(void) viewDidAppear:(BOOL)animated{
-
-
     [self.tableView triggerPullToRefresh];
-
-
+    //[self setFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -131,6 +129,14 @@
     [self.tableView.pullToRefreshView setTitle:@"下拉刷新" forState:SVPullToRefreshStateStopped];
     [self.tableView.pullToRefreshView setTitle:@"释放更新" forState:SVPullToRefreshStateTriggered];
 }
+
+
+-(void) setFirstResponder{
+    NSIndexPath *path=[NSIndexPath indexPathForItem:0 inSection:0];
+    UITextField *filed=((UICustomCell*)[self.tableView cellForRowAtIndexPath:path]).inputText;
+    [self setFirstResponder:filed];
+}
+
 
 - (void) refreshActionTriggerd{
     ViewController __weak * weakSelf=self;
@@ -270,9 +276,7 @@
 #pragma mark table view  delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     return self.height;
-
 
 }
 
@@ -287,6 +291,7 @@
 }
 
 //delete ,move ,add
+#pragma mark Edit
 
 
 -(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
@@ -303,6 +308,7 @@
 }
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    self.deleteOnRow=NO;
     if(self.currencyShown.count>2)
         return UITableViewCellEditingStyleDelete;
     else return  UITableViewCellEditingStyleNone;
@@ -326,8 +332,19 @@
 }
 
 
+//user driven event.
+- (void)tableView:(UITableView*)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath{
+    self.deleteOnRow=YES;
+}
 
-#pragma mark Edit
+-(void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.row>=0 && indexPath.row<self.currencyShown.count ) {
+        [self setEditing:NO animated:YES];
+
+    }
+}
+
+
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     NSLog(@"set editing is called");
     [super setEditing:editing animated:animated];
@@ -335,11 +352,10 @@
     [self dismissKeyboard];
     if (editing) {
         //save and clear;
-        [self clearAndSaveNumberStatus];
-        
+        if(!self.deleteOnRow)   [self clearAndSaveNumberStatus];
     }
     else {
-        [self restoreStatus];
+        if(!self.deleteOnRow)   [self restoreStatus];
         [self saveCurrencyShown];
         [self saveFirstNumber];
         
@@ -375,6 +391,8 @@
 }
 
 **/
+
+
 
 #pragma mark UI update actions
 
