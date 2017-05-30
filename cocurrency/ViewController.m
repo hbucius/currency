@@ -43,16 +43,6 @@
     [self setDelegateAndSource];
     [self setupForDismissKeyboard];
     [self addRefreshSupport];
- }
-
--(void) viewDidAppear:(BOOL)animated{
-    [self.tableView triggerPullToRefresh];
-    //[self setFirstResponder];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark init functions
@@ -63,22 +53,20 @@
     _tableview.delegate=self;
 }
 
--(void)initMainFrameUI{
+-(void)initMainFrameUI {
     self.MainUITitle.title=@"常用汇率换算";
-    self.tableview.allowsSelection=false;
-    self.tableView.backgroundColor=[UIColor whiteColor];
-    self.navigationController.view.backgroundColor=[UIColor whiteColor];
+    self.tableview.allowsSelection = false;
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.navigationController.view.backgroundColor = [UIColor whiteColor];
     self.edgesForExtendedLayout = UIRectEdgeNone ;
-    _height=70;
-    self.navigationItem.rightBarButtonItem=self.editButtonItem;
-    
+    _height = 70;
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void) initCurrencyShow{
-     //_currencyShown=[[NSMutableArray alloc]initWithObjects:@"CNY",@"USD",@"EUR",@"HKD", @"JPY",@"KRW",@"GBP",@"TWD",@"MOP",@"CAD",nil];
-    _currencyShown=[[CurrencyShown getCurrencyShown] mutableCopy];
+    _currencyShown = [[CurrencyShown getCurrencyShown] mutableCopy];
 }
-- (NSMutableArray *)  NumberShown  {
+- (NSMutableArray *)NumberShown {
     if(_NumberShown==nil){
         _NumberShown=[[NSMutableArray alloc]init];
         NSNumber *firstNumber=[FirstNumber getFirstNumber];
@@ -94,74 +82,69 @@
     
 }
 
--(void) initCurrencyInfo{
-    _info=[[DownloadInfo alloc]initWithDelegate:self];
+- (void)initCurrencyInfo{
+    _info=[[DownloadInfo alloc] initWithDelegate:self];
 }
 
 
 -(void) setupForDismissKeyboard{
-    UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
-    [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+    UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                  action:@selector(dismissKeyboard)];
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
         [self.tableview addGestureRecognizer:tapRecognizer];
         self.keyBoardShown=YES;
         self.tableView.showsPullToRefresh=NO;
     }];
-    [[NSNotificationCenter defaultCenter]addObserverForName:UIKeyboardDidHideNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidHideNotification
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
         [self.tableview removeGestureRecognizer:tapRecognizer];
         self.keyBoardShown=NO;
         self.tableView.showsPullToRefresh=YES;
-
     }];
-    
-    
 }
-
-
-
 
 - (void)addRefreshSupport{
     ViewController __weak * weakSelf=self;
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refreshActionTriggerd];
-        
     }];
     [self.tableView.pullToRefreshView setTitle:@"加载中......" forState:SVPullToRefreshStateLoading];
     [self.tableView.pullToRefreshView setTitle:@"下拉刷新" forState:SVPullToRefreshStateStopped];
     [self.tableView.pullToRefreshView setTitle:@"释放更新" forState:SVPullToRefreshStateTriggered];
 }
 
-
--(void) setFirstResponder{
+-(void)setFirstResponder{
     NSIndexPath *path=[NSIndexPath indexPathForItem:0 inSection:0];
     UITextField *filed=((UICustomCell*)[self.tableView cellForRowAtIndexPath:path]).inputText;
     [self setFirstResponder:filed];
 }
 
-
-- (void) refreshActionTriggerd{
+- (void)refreshActionTriggerd{
     ViewController __weak * weakSelf=self;
     [weakSelf.info updateInfo];
 }
 
--(void) updateUI {
-    NSLog(@"UI is updated");
+- (void)updateUI {
     NSIndexPath *indexpath=[NSIndexPath indexPathForRow:0 inSection:0];
     [self updateCellWithIndexPath:indexpath];
-   
 }
--(void) updateUIError{
-    
-    NSLog(@"UI Error is updated");
-    dispatch_after([self refreshDelayTime],dispatch_get_main_queue(),^
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: [self UIErrorString] message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-       
+
+- (void)updateUIError {
+    dispatch_after([self refreshDelayTime],dispatch_get_main_queue(),^ {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self UIErrorString]
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil, nil];
         [alert show];
         [self.tableView.pullToRefreshView stopAnimating];
-
     });
-
- }
+}
 
 -(NSString *) UIErrorString{
     NSMutableString *ret=[@"无法获取最新汇率，将使用" mutableCopy];
@@ -197,10 +180,8 @@
             
         }
     }
-    
     [ret appendString:@"获取的汇率进行换算"];
     return ret;
-    
 }
 
 -(dispatch_time_t) refreshDelayTime{
@@ -210,8 +191,7 @@
 
 -(void) updateUIOK{
     NSLog(@"updateUI OK");
-    dispatch_after([self refreshDelayTime],dispatch_get_main_queue(),^
-                   {
+    dispatch_after([self refreshDelayTime],dispatch_get_main_queue(), ^{
                        [self.tableView.pullToRefreshView stopAnimating];
                        [self alertViewShowsWithRect:[self updateSuccessedAlertViewRect] String:@"汇率更新成功" duration:2.5];
                    });
@@ -228,11 +208,16 @@
     label.textAlignment=NSTextAlignmentCenter;
     NSMutableAttributedString *attributedString=[[NSMutableAttributedString alloc]initWithString:text];
     [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, attributedString.length)];
-    [attributedString addAttribute:NSFontAttributeName   value:[UIFont fontWithName:nil size:15] range:NSMakeRange(0, attributedString.length)];
+    [attributedString addAttribute:NSFontAttributeName
+                             value:[UIFont systemFontOfSize:15]
+                             range:NSMakeRange(0, attributedString.length)];
     label.attributedText=[attributedString copy];
     [alertView addSubview:label];
     [self.view addSubview:alertView];
-    [UIView transitionWithView:alertView duration:time options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+    [UIView transitionWithView:alertView
+                      duration:time
+                       options:UIViewAnimationOptionBeginFromCurrentState
+                    animations:^{
         alertView.alpha=0;
     } completion:^(BOOL finished){
         [alertView removeFromSuperview];
@@ -240,22 +225,26 @@
 }
 
 -(CGRect) updateSuccessedAlertViewRect{
-    CGSize  alertViewSize=CGSizeMake(100, 30);
-    CGSize  screenSize=[UIScreen mainScreen].bounds.size;
-    int num=(screenSize.height-self.navigationController.navigationBar.frame.size.height)/self.height;
-    CGFloat alertViewOrigineX=self.tableView.frame.size.width/2-alertViewSize.width/2;
-    CGFloat alertViewOrigineY=self.height*(num-1)-alertViewSize.height;
-    CGRect rect= CGRectMake(alertViewOrigineX, alertViewOrigineY, alertViewSize.width,alertViewSize.height);
+    CGSize  alertViewSize = CGSizeMake(100, 30);
+    CGSize  screenSize = [UIScreen mainScreen].bounds.size;
+    NSInteger num = (screenSize.height - self.navigationController.navigationBar.frame.size.height) / self.height;
+    CGFloat alertViewOrigineX = self.tableView.frame.size.width / 2 - alertViewSize.width / 2;
+    CGFloat alertViewOrigineY = self.height * (num - 1) - alertViewSize.height;
+    CGRect rect = CGRectMake(alertViewOrigineX, alertViewOrigineY, alertViewSize.width,alertViewSize.height);
     return rect;
 }
 
 #pragma mark table view data source
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self dismissKeyboard];
+}
+
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *reuseIdentifier=@"tableCell";
     UICustomCell *cell=[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     NSString *currencyName=[self.currencyShown objectAtIndex:indexPath.row];
-    NSLog(@"the currency name is %@, the row is %ld",currencyName,indexPath.row);
     cell.currencyImage.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@@2x.png",currencyName]];
     NSMutableAttributedString *currencyNameMutableString=[[NSMutableAttributedString alloc]initWithString:currencyName];
     [currencyNameMutableString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0] range:NSMakeRange(0,currencyNameMutableString.length)];
@@ -277,13 +266,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return self.height;
-
 }
 
 
 
 - (void) updateCell:(UICustomCell *) cellA inputText:(float)currencyNumber{
-    NSLog(@"updateCell is called");
     if(fabs((float)(int)currencyNumber-currencyNumber)<pow(10, -10))
         cellA.inputText.text=[NSString stringWithFormat:@"%.0f",currencyNumber];
     else
@@ -319,11 +306,12 @@
 }
 
 -(BOOL) tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
-
     return YES;
 }
 
--(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void) tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle==UITableViewCellEditingStyleDelete) {
         [self.NumberShown_temp removeObjectAtIndex:indexPath.row];
         [self.currencyShown removeObjectAtIndex:indexPath.row];
@@ -340,29 +328,25 @@
 -(void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.row>=0 && indexPath.row<self.currencyShown.count ) {
         [self setEditing:NO animated:YES];
-
     }
 }
 
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-    NSLog(@"set editing is called");
     [super setEditing:editing animated:animated];
     [self.tableView setEditing:editing animated:YES];
     [self dismissKeyboard];
     if (editing) {
         //save and clear;
         if(!self.deleteOnRow)   [self clearAndSaveNumberStatus];
-    }
-    else {
+    } else {
         if(!self.deleteOnRow)   [self restoreStatus];
         [self saveCurrencyShown];
         [self saveFirstNumber];
-        
     }
 }
 
--(void) clearAndSaveNumberStatus{
+-(void)clearAndSaveNumberStatus {
     self.NumberShown_temp=[self.NumberShown mutableCopy];
     if(self.NumberShown_temp.count>0){
         [self.NumberShown replaceObjectAtIndex:0 withObject:[NSNumber numberWithFloat:0]];
@@ -370,9 +354,7 @@
         UICustomCell *cell=(UICustomCell*)[self.tableView cellForRowAtIndexPath:path];
         [self updateCell:cell inputText:0];
         [self updateCellWithIndexPath:0];
-        
     }
-   
 }
 
 -(void) restoreStatus{
@@ -380,24 +362,10 @@
     [self refreshTableView];
     
 }
-/**
-
-- (void) scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"enter into scrollViewWillBeginDragging");
-    //first detect whether it is trigger by people
-   
-    [self dismissKeyboard];
-
-}
-
-**/
-
-
 
 #pragma mark UI update actions
 
 - (IBAction)inputField:(UITextField *)sender {
-    // NSLog([[[[[sender superview] superview]superview] class] debugDescription]);
     NSLog(@"input Field is called");
     float OSversion=[[[UIDevice currentDevice] systemVersion] floatValue];
     UIView *view;
@@ -418,15 +386,6 @@
 - (IBAction)inputFieldBeginEdit:(UITextField *)sender {
     self.firstResponder=sender;
     NSLog(@"firstResponder exists22 ,%p",self.firstResponder);
-
-}
-
-- (IBAction)TouchDown:(UITextField *)sender {
-    NSLog(@"I am touching down");
-  //  BOOL abc=[sender becomeFirstResponder];
-  //  if (abc) {
-  //      NSLog(@"abc is true");
-  ///  }
 }
 
 
@@ -462,10 +421,7 @@
 #pragma mark help functions
 
 - (void) dismissKeyboard{
-    NSLog(@"I am tring to dismiss Keyboard");
-    if(self.firstResponder && self.keyBoardShown) {
-       [self.firstResponder resignFirstResponder];
-        
+    if ([self.firstResponder resignFirstResponder]) {
         self.firstResponder=nil;
     }
 }

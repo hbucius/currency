@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "Context.h"
 #import "CurrencyRate+Update.h"
-NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrencies/quote?format=json&";
+NSString * yahoolURL=@"https://finance.yahoo.com/webservice/v1/symbols/allcurrencies/quote?format=json";
 
 @interface DownloadInfo ()
 - (NSDictionary *) getDicFromObject :(NSData *) data;
@@ -27,7 +27,7 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
 -(instancetype) initWithDelegate:(id)delegate {
     self=[super init];
     if(self) {
-        _session=[NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
+        _session=[NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
         _delegate=delegate;
         [self currency];
      }
@@ -61,15 +61,17 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
             if (dic!=nil && dic.count>0)
             {
                 self.currency=dic;
-                [self.delegate updateUI];
-                [self.delegate updateUIOK];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate updateUI];
+                    [self.delegate updateUIOK];
+                });
                 [CurrencyRate updateCoreData:self.currency];
-            }
-            else {
-                [self.delegate updateUIError];
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate updateUIError];
+                });
             }
             data=nil;
-            
         }];
         [dataTask resume];
         
@@ -109,6 +111,7 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
                             
                         }
                     }
+                    mutableDiction[@"USD/USD"] = @(1);
                     return mutableDiction;
                 }
                 
@@ -118,9 +121,6 @@ NSString * yahoolURL=@"http://finance.yahoo.com/webservice/v1/symbols/allcurrenc
     }
     return nil;
 }
-
-
-
 
 -(float) exchangeToCurrency:(NSString*) newCurrencyName withNumber:(float) number oldCurrency:(NSString*) oldCurrencyName{
     float value1=[[self.currency valueForKey:[NSString stringWithFormat:@"USD/%@",oldCurrencyName]] floatValue];

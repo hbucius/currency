@@ -36,7 +36,7 @@
 }
 +(NSArray *) getCurrencyShown{
     NSArray __block *array;
-   dispatch_sync([[Context SharedInstance]getCocurrentQueue], ^{
+   dispatch_sync([[Context SharedInstance] getCocurrentQueue], ^{
        NSEntityDescription *entity=[NSEntityDescription entityForName:@"CurrencyShown" inManagedObjectContext:[[Context SharedInstance]context]];
        NSFetchRequest *request=[[NSFetchRequest alloc]init];
        [request setEntity:entity];
